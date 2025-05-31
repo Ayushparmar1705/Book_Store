@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "chart.js": "^4.4.9",
+    "multer": "^1.4.5-lts.2",
+    "react-avatar-editor": "^13.0.2",
+    "react-chartjs-2": "^5.3.0",
+    "recharts": "^2.15.3"
+  },
+  "devDependencies": {
+    "npm-force-resolutions": "^0.0.10"
+  }
+}

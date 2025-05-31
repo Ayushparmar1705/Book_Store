@@ -1,0 +1,84 @@
+import React, { useEffect, useState } from 'react';
+
+export default function Sucess_payment() {
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    async function getOrders() {
+      const URL = "http://localhost:8080/order-history";
+      const response = await fetch(URL);
+      const result = await response.json();
+      if (result) {
+        setOrders(result);
+      }
+    }
+    getOrders();
+  }, []);
+
+  return (
+    <div className='mt-[10px]'>
+      <div>
+        {orders.map((data, index) => {
+          // Parse items JSON safely
+          let items = [];
+          try {
+            items = JSON.parse(data.items);
+          } catch (e) {
+            console.error("Error parsing items JSON:", e);
+          }
+
+          return (
+            <div key={index}>
+              <div className='p-[10px] w-[100%] border-[2px] border-pink-50'>
+                <table className='p-[10px] w-full text-center border-collapse'>
+                  <thead>
+                    <tr>
+                      <th className='p-[20px] border'>Order Id</th>
+                      <th className='p-[20px] border'>Total Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className='p-[20px] border'>{data.oid}</td>
+                      <td className='p-[20px] border'>₹{data.amount}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className='p-[10px] ml-[10px]'>
+                <h3 className='font-semibold mb-2'>Items:</h3>
+                <table className='w-full border border-gray-200 text-left'>
+                  <thead>
+                    <tr>
+                      <th className='p-2 border'>Name</th>
+                      <th className='p-2 border'>Quantity</th>
+                      <th className='p-2 border'>Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Array.isArray(items) && items.length > 0 ? (
+                      items.map((item, idx) => (
+                        <tr key={idx}>
+                          <td className='p-2 border'>{item.name}</td>
+                          <td className='p-2 border'>{item.quantity}</td>
+                          <td className='p-2 border'>₹{item.price}</td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan={3} className='p-2 border text-center'>
+                          No items available
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
