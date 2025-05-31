@@ -1,15 +1,15 @@
 {
-  "name": "backend",
+  "name": "bookstore",
   "version": "1.0.0",
   "description": "this is the backend of the online book store system",
-  "main": "index.js",
+  "license": "ISC",
+  "author": "",
   "type": "module",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.cjs"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.7",
