@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "body-parser": "^2.2.0",
     "cookie-parser": "^1.4.7",
     "cookie-session": "^2.1.0",
     "cors": "^2.8.5",
@@ -20,6 +21,8 @@
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.0",
     "mysql": "^2.18.1",
+    "mysql2": "^3.14.1",
+    "nodemailer": "^7.0.3",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "stripe": "^18.1.0"
