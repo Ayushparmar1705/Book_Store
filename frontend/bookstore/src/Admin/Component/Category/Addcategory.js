@@ -29,12 +29,13 @@ export default function Addcategory() {
     }
     return (
         <div>
-            <div className='w-[500px] p-[20px]  bg-stone-50 text-center m-auto mt-[100px] md:max-lg:bg-black'>
+            <div className='w-[500px] p-[20px]  bg-gray-50 shadow text-center m-auto mt-[100px] md:max-lg:bg-black'>
+            <p>Add Category</p>
                 <form onSubmit={handleAddcategory}>
                     <table>
                         <tr>
                             <td className='p-[20px]'><label>Enter category</label></td>
-                            <td className='p-[20px]'><input className='rounded-[10px] p-[10px] border-[2px] focus:outline-none focus:border-fuchsia-500 focus:transition  duration-300 ease-in-out' type='text' placeholder='Enter book category' onChange={(e)=>{setCategory(e.target.value)}}></input></td>
+                            <td className='p-[20px]'><input className='rounded-[10px] p-[10px] border-[2px] border-gray-100 focus:outline-none focus:border-gray-200 focus:transition  duration-300 ease-in-out' type='text' placeholder='Enter book category' onChange={(e)=>{setCategory(e.target.value)}}></input></td>
                         </tr>
                     </table>
                     <button className='w-[300px] bg-slate-300 text-black hover:bg-black hover:text-white rounded-[10px] p-[10px]' type='submit'>Add Category</button>

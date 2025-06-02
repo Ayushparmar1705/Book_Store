@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Footer from '../../../User/Component/Footer';
-
 export default function Addbooks() {
     const [categoryList, setCategoryList] = useState([]);
     const [isbn10, setIsbn10] = useState("");
@@ -140,7 +138,7 @@ export default function Addbooks() {
                     <button onClick={AddBooks} className='w-[300px] bg-slate-300 text-black hover:bg-black hover:text-white rounded-[10px] p-[10px]' type='submit'>Add Book</button>
                 </form>
             </div>
-        
+
         </div>
     )
 }

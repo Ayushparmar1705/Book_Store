@@ -97,27 +97,27 @@ export default function Updatebook() {
 
     return (
         <div>
-            <div className='w-[700px] bg-stone-50 mt-[10px] m-auto text-center max-[900px]:flex flex-col max-[900px]:w-[100%] '>
+            <div className='w-[700px] shadow mt-[10px] m-auto text-center max-[900px]:flex flex-col max-[900px]:w-[100%] '>
                 <h1>UPDATE BOOKS</h1>
                 <form onSubmit={updateBooks}>
                     <table className='m-auto max-[900px]:w-[100%] '>
                         <tbody>
                             <tr className='max-[900px]:flex flex-col'>
                                 <td className='p-[10px]'><label>Book Isbn-10</label></td>
-                                <td className='p-[10px]'><input onChange={(e) => { setIsbn10(e.target.value) }} className='w-[250px] rounded-[10px] p-[10px] border-[2px] focus:outline-none focus:border-fuchsia-500 focus:transition  duration-300 ease-in-out' type='text' value={isbn10} placeholder='Enter book isbn' /></td>
+                                <td className='p-[10px]'><input onChange={(e) => { setIsbn10(e.target.value) }} className='w-[400px] rounded-[10px] p-[10px] border-[2px] border-gray-50 focus:outline-none focus:border-gray-200 focus:transition  duration-300 ease-in-out' type='text' value={isbn10} placeholder='Enter book isbn 10' /></td>
                             </tr>
                             <tr className='max-[900px]:flex flex-col'>
                                 <td className='p-[10px]'><label>Book Isbn-13</label></td>
-                                <td className='p-[10px]'><input onChange={(e) => { setIsbn13(e.target.value) }} className='w-[250px] rounded-[10px] p-[10px] border-[2px] focus:outline-none focus:border-fuchsia-500 focus:transition  duration-300 ease-in-out' type='text' value={isbn13} placeholder='Enter book isbn' /></td>
+                                <td className='p-[10px]'><input onChange={(e) => { setIsbn13(e.target.value) }} className='w-[400px] rounded-[10px] p-[10px] border-[2px] border-gray-50 focus:outline-none focus:border-gray-200 focus:transition  duration-300 ease-in-out' type='text' value={isbn13} placeholder='Enter book isbn 13' /></td>
                             </tr>
                             <tr className='max-[900px]:flex flex-col'>
                                 <td className='p-[10px]'><label>Book Name</label></td>
-                                <td className='p-[10px]'><input value={name} onChange={(e) => { setName(e.target.value) }} className='w-[250px] rounded-[10px] p-[10px] border-[2px] focus:outline-none focus:border-fuchsia-500 focus:transition  duration-300 ease-in-out' type='text' placeholder='Enter book name' /></td>
+                                <td className='p-[10px]'><input value={name} onChange={(e) => { setName(e.target.value) }} className='w-[400px] rounded-[10px] p-[10px] border-[2px] border-gray-200 focus:outline-none focus:border-gray-200 focus:transition  duration-300 ease-in-out' type='text' placeholder='Enter book name' /></td>
                             </tr>
                             <tr className='max-[900px]:flex flex-col'>
                                 <td className='p-[10px]'><label>Book Category</label></td>
                                 <td className='p-[10px]'>
-                                    <select onChange={(e) => { setCategory(e.target.value) }} className='w-[250px] rounded-[10px] p-[10px] border-[2px] focus:outline-none focus:border-fuchsia-500 focus:transition  duration-300 ease-in-out' defaultValue="">
+                                    <select onChange={(e) => { setCategory(e.target.value) }} className='w-[400px] rounded-[10px] p-[10px] border-[2px] border-gray-50 focus:outline-none focus:border-gray-200 focus:transition  duration-300 ease-in-out' defaultValue="">
                                         <option value="" disabled>Select Category</option>
                                         {
                                             categoryList.map((data, index) => (
@@ -128,32 +128,33 @@ export default function Updatebook() {
                             </tr>
 
                             <tr className='max-[900px]:flex flex-col'>
+                          
                                 <td className='p-[10px]'><label>Book Description</label></td>
-                                <td className='p-[10px]'><textarea value={description} onChange={(e) => { setDescription(e.target.value) }} className='w-[250px] rounded-[10px] p-[10px] border-[2px] focus:outline-none focus:border-fuchsia-500 focus:transition  duration-300 ease-in-out' placeholder='Enter book description'></textarea></td>
+                                <td className='p-[10px]'><textarea rows={5} cols={20} value={description} onChange={(e) => { setDescription(e.target.value) }} className='w-[400px] rounded-[10px] w-[200px] p-[10px] border-[2px] border-gray-50 focus:outline-none focus:border-gray-200 focus:transition  duration-300 ease-in-out' placeholder='Enter book description'></textarea></td>
                             </tr>
                             <tr className='max-[900px]:flex flex-col'>
                                 <td className='p-[10px]'><label>Book Price</label></td>
-                                <td className='p-[10px]'><input value={price} onChange={(e) => { setPrice(e.target.value) }} min={0} className='w-[250px] rounded-[10px] p-[10px] border-[2px] focus:outline-none focus:border-fuchsia-500 focus:transition  duration-300 ease-in-out' type='number' placeholder='Enter book price' /></td>
+                                <td className='p-[10px]'><input value={price} onChange={(e) => { setPrice(e.target.value) }} min={0} className='w-[400px] rounded-[10px] p-[10px] border-[2px] border-gray-50 focus:outline-none focus:border-gray-200 focus:transition  duration-300 ease-in-out' type='number' placeholder='Enter book price' /></td>
                             </tr>
                             <tr className='max-[900px]:flex flex-col'>
                                 <td className='p-[10px]'><label>Book Quantity</label></td>
-                                <td className='p-[10px]'><input value={quantity} onChange={(e) => { setQuantity(e.target.value) }} min={0} max={200} className='w-[250px] rounded-[10px] p-[10px] border-[2px] focus:outline-none focus:border-fuchsia-500 focus:transition  duration-300 ease-in-out' type='number' placeholder='Enter book quantity' /></td>
+                                <td className='p-[10px]'><input value={quantity} onChange={(e) => { setQuantity(e.target.value) }} min={0} max={200} className='w-[400px] rounded-[10px] p-[10px] border-[2px] border-gray-50 focus:outline-none focus:border-gray-200 focus:transition  duration-300 ease-in-out' type='number' placeholder='Enter book quantity' /></td>
                             </tr>
                             <tr className='max-[900px]:flex flex-col'>
                                 <td className='p-[10px]'><label>Book Pages</label></td>
-                                <td className='p-[10px]'><input value={page} onChange={(e) => { setPage(e.target.value) }} className='w-[250px] rounded-[10px] p-[10px] border-[2px] focus:outline-none focus:border-fuchsia-500 focus:transition  duration-300 ease-in-out' type='number' placeholder='Enter book pages' /></td>
+                                <td className='p-[10px]'><input value={page} onChange={(e) => { setPage(e.target.value) }} className='w-[400px] rounded-[10px] p-[10px] border-[2px] border-gray-50 focus:outline-none focus:border-gray-200 focus:transition  duration-300 ease-in-out' type='number' placeholder='Enter book pages' /></td>
                             </tr>
                             <tr className='max-[900px]:flex flex-col'>
                                 <td className='p-[10px]'><label>Book Author</label></td>
-                                <td className='p-[10px]'><input value={author} onChange={(e) => { setAuthor(e.target.value) }} className='w-[250px] rounded-[10px] p-[10px] border-[2px] focus:outline-none focus:border-fuchsia-500 focus:transition  duration-300 ease-in-out' type='text' placeholder='Enter book author' /></td>
+                                <td className='p-[10px]'><input value={author} onChange={(e) => { setAuthor(e.target.value) }} className='w-[400px] rounded-[10px] p-[10px] border-[2px] border-gray-50 focus:outline-none focus:border-gray-200 focus:transition  duration-300 ease-in-out' type='text' placeholder='Enter book author' /></td>
                             </tr>
                             <tr className='max-[900px]:flex flex-col'>
                                 <td className='p-[10px]'><label>Book Publisher</label></td>
-                                <td className='p-[10px]'><input value={publisher} onChange={(e) => { setPublisher(e.target.value) }} className='w-[250px] rounded-[10px] p-[10px] border-[2px] focus:outline-none focus:border-fuchsia-500 focus:transition  duration-300 ease-in-out' type='text' placeholder='Enter book publisher' /></td>
+                                <td className='p-[10px]'><input value={publisher} onChange={(e) => { setPublisher(e.target.value) }} className='w-[400px] rounded-[10px] p-[10px] border-[2px] border-gray-50 focus:outline-none focus:border-gray-200 focus:transition  duration-300 ease-in-out' type='text' placeholder='Enter book publisher' /></td>
                             </tr>
                             <tr className='max-[900px]:flex flex-col'>
                                 <td className='p-[10px]'><label>Book Langauge</label></td>
-                                <td className='p-[10px]'><input value={langauge} onChange={(e) => { setLangauge(e.target.value) }} className='w-[250px] rounded-[10px] p-[10px] border-[2px] focus:outline-none focus:border-fuchsia-500 focus:transition  duration-300 ease-in-out' type='text' placeholder='Enter book Langauge' /></td>
+                                <td className='p-[10px]'><input value={langauge} onChange={(e) => { setLangauge(e.target.value) }} className='w-[400px] rounded-[10px] p-[10px] border-[2px] border-gray-50 focus:outline-none focus:border-gray-200 focus:transition  duration-300 ease-in-out' type='text' placeholder='Enter book Langauge' /></td>
                             </tr>
                             <tr className='max-[900px]:flex flex-col'>
                                 <td><label className='p-[10px]'>Book Image</label></td>

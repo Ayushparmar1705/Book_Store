@@ -45,7 +45,7 @@ export default function Dashboard() {
   }, [TotalUsers.length])
   useEffect(() => {
     console.log(totalOrder)
-  })
+  },[totalOrder])
 
 
 
@@ -67,18 +67,18 @@ export default function Dashboard() {
 
   return (
     <div className='p-4'>
-      <div className='flex justify-center gap-5  max-[900px]:flex max-[900px]:flex-col max-[900px]:items-center'>
-        <div className='bg-gradient-to-r from-blue-500 to-teal-400 hover:scale-110 p-6 w-[300px] h-[100px] text-center shadow-xl rounded-[10px] max-[900px]:w-[300PX] '>
+      <div className='flex justify-center gap-20  max-[900px]:flex max-[900px]:flex-col max-[900px]:items-center'>
+        <div className='bg-white rounded-lg shadow hover:scale-110 p-6 w-[400px] h-[100px]  max-[900px]:w-[400px] '>
           <h1 className='text-[20px] font-bold'>Total Books</h1>
-          <p className='text-[20px] font-bold'>{Totalbooks}</p>
+          <p className='text-[20px]'>{Totalbooks}</p>
         </div>
-        <div className=' bg-gradient-to-r from-pink-200 to-purple-600 p-6 w-[300px] h-[100px] hover:scale-110 text-center shadow-xl rounded-[10px] max-[900px]:w-[300PX]'>
+        <div className=' bg-white rounded-lg shadow  p-6 w-[400px] h-[100px] hover:scale-110   rounded-[10px] max-[900px]:w-[400px]'>
           <h1 className='text-[20px] font-bold'>Total Users</h1>
-          <p className='text-[20px] font-bold'>{TotalUsers}</p>
+          <p className='text-[20px]'>{TotalUsers}</p>
         </div>
-        <div className='bg-linear-65 from-orange-500 to-pink-400 p-6 w-[300px] h-[100px] hover:scale-110 text-center shadow-xl rounded-[10px] max-[900px]:w-[300PX]'>
+        <div className='bg-white rounded-lg shadow  from-orange-500 to-pink-400 p-6 w-[400px] h-[100px] hover:scale-110   rounded-[10px] max-[900px]:w-[400px]'>
           <h1 className='text-[20px] font-bold'>Total Orders</h1>
-          <p className='text-[20px] font-bold'>5</p>
+          <p className='text-[20px]'>{totalOrder.length}</p>
         </div>
       </div>
       <div className='flex'>
@@ -87,7 +87,7 @@ export default function Dashboard() {
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={chartdata}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />       {/* X-axis uses 'date' */}
+              <XAxis dataKey="date" />
               <YAxis />                      {/* Y-axis uses 'amount' automatically */}
               <Tooltip />
               <Legend />

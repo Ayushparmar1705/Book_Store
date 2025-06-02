@@ -6,6 +6,7 @@ export default function Listbooks() {
   const [bookname, setBookName] = useState("");
   const [reset, setReset] = useState(false);
   const [search, setSearch] = useState(true);
+  const [newdata , setNewData] = useState([]);
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -19,6 +20,7 @@ export default function Listbooks() {
     setBookName("");
     setReset(false);
     setSearch(true);
+    setNewData(result);
   }
 
   useEffect(() => {
@@ -26,13 +28,21 @@ export default function Listbooks() {
   }, []);
 
   async function SearchBookByName() {
-    const URL = `http://localhost:8080/search/${bookname}`;
+    console.log(bookname);
+    if(bookname === "")
+    {
+      setBookData(newdata) 
+    }
+    else
+    {
+      const URL = `http://localhost:8080/search/${bookname}`;
     const data = await fetch(URL);
     setReset(true);
     setSearch(false);
     const result = await data.json();
     setBookData(result);
     setCurrentPage(1); // Reset to page 1 on search
+    }
   }
 
   const indexOfLastItems = currentPage * itemsPerPage;
@@ -49,49 +59,56 @@ export default function Listbooks() {
           type='search'
           className='border-[2px] w-[300px] p-[10px]'
           placeholder='Search book by name'
+          onKeyDown={(e)=>{
+            if(e.key === "Enter")
+            {
+              SearchBookByName();
+            }
+          }}
         />
-        {reset && <input onClick={Allbooks} type='reset' value="Reset" />}
-        {search && <img onClick={SearchBookByName} src='/images/search.png' className='h-[50px] w-[50px]' alt='no' />}
+   
       </div>
-
+          
       <div className='text-center overflow-x-scroll max-[900px]:overflow-x-scroll max-[900px]:w-[100%]'>
-        <table className='m-auto'>
+        <table className='m-auto mt-[10px]'>
           <thead>
-            <tr>
+            <tr className='bg-gray-100 p-[20px] border-t-[2px] border-b-[2px]'>
               <th className='p-[10px] text-center'>Isbn-10</th>
               <th className='p-[10px] text-center'>Isbn-13</th>
-              <th className='p-[10px] text-center'>Name</th>
+              <th className='p-[10px] text-center'>Name <i onClick={()=>{
+                setBookData(bookData.sort())
+              }} class="fas fa-sort"></i></th>
               <th className='p-[10px] text-center'>Category</th>
-              <th className='p-[10px] text-center'>Description</th>
+            
               <th className='p-[10px] text-center'>Price</th>
-              <th className='p-[10px] text-center'>Quantity</th>
+              <th className='p-[10px] text-center'>In Stock</th>
               <th className='p-[10px] text-center'>Pages</th>
               <th className='p-[10px] text-center'>Author</th>
               <th className='p-[10px] text-center'>Publisher</th>
-              <th className='p-[10px] text-center'>Publish date</th>
-              <th className='p-[10px] text-center'>Language</th>
-              <th className='p-[10px] text-center'>Image</th>
+        
+    
+              <th className='p-[10px] text-center'>Cover</th>
               <th colSpan={2} className='p-[10px] text-center'>Action</th>
             </tr>
           </thead>
           <tbody>
             {currentItems.map((data, idx) => (
-              <tr key={idx} className='hover:bg-pink-50'>
-                <td className='p-[30px] text-center'>{data.isbn10}</td>
-                <td className='p-[30px] text-center'>{data.isbn13}</td>
-                <td className='p-[30px] text-center'>{data.name}</td>
-                <td className='p-[30px] text-center'>{data.category}</td>
-                <td className="p-[30px] text-center max-w-xs overflow-x-auto whitespace-nowrap">{data.description}</td>
-                <td className='p-[30px] text-center'>{data.price}</td>
-                <td className='p-[30px] text-center'>{data.quantity}</td>
-                <td className='p-[30px] text-center'>{data.pages}</td>
-                <td className='p-[30px] text-center'>{data.author}</td>
-                <td className='p-[30px] text-center'>{data.publisher}</td>
-                <td className='p-[30px] text-center'>{data.publish_date}</td>
-                <td className='p-[30px] text-center'>{data.language}</td>
+              <tr key={idx} className='hover:bg-gray-50'>
+                <td className='p-[20px] text-center'>{data.isbn10}</td>
+                <td className='p-[20px] text-center'>{data.isbn13}</td>
+                <td className='p-[20px] text-center'>{data.name}</td>
+                <td className='p-[20px] text-center'>{data.category}</td>
+             
+                <td className='p-[20px] text-center'>{data.price}</td>
+                <td className='p-[20px] text-center'>{data.quantity}</td>
+                <td className='p-[20px] text-center'>{data.pages}</td>
+                <td className='p-[20px] text-center'>{data.author}</td>
+                <td className='p-[20px] text-center'>{data.publisher}</td>
+ 
+
                 <td><img className='h-[100px] w-[100px]' src={`/${data.image}`} alt='NoImage' /></td>
-                <td className='p-[30px] text-center'><Link to={`/dashboard/deletebook/${data.id}`}>Delete</Link></td>
-                <td className='p-[30px] text-center'><Link to={`/dashboard/onebook/${data.id}`}>Update</Link></td>
+                <td className='p-[20px] text-center'><Link to={`/dashboard/deletebook/${data.id}`}><i class='fas fa-trash-alt'></i></Link></td>
+                <td className='p-[20px] text-center'><Link to={`/dashboard/onebook/${data.id}`}><i class="fa fa-edit" ></i></Link></td>
               </tr>
             ))}
           </tbody>
