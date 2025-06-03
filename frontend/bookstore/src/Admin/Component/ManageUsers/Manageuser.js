@@ -16,8 +16,8 @@ export default function Manageuser() {
         <div className='w-[100%]'>
             <div className='w-[100%] text-center p-[20px]'>
                 <p className='border-b-[2px] '>ALL USERS</p>
-                <table className='text-center m-[auto]'>
-                    <tr className='p-[20px]'>
+                <table className='text-center m-[auto] mt-[10px]'>
+                    <tr className='p-[20px] bg-gray-50 border-b-[2px] border-gray-50 border-t-[2px] '>
                         <td className='p-[20px]'>First Name</td>
                         <td className='p-[20px]'>Last Name</td>
                         <td className='p-[20px]'>Email</td>

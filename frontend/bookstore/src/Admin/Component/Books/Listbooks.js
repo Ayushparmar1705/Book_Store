@@ -52,12 +52,12 @@ export default function Listbooks() {
   return (
     <div className='bg-white text-center'>
       <h1 className='border-b-[2px]'>ALL BOOKS</h1><br />
-      <div className='flex justify-center items-center'>
+      <div>
         <input
           value={bookname}
           onChange={(e) => setBookName(e.target.value)}
           type='search'
-          className='border-[2px] w-[300px] p-[10px]'
+          className='border-[2px] outline-none border-gray-100 rounded-[10px] hover:outline-none w-[300px] p-[10px]'
           placeholder='Search book by name'
           onKeyDown={(e)=>{
             if(e.key === "Enter")
@@ -72,12 +72,10 @@ export default function Listbooks() {
       <div className='text-center overflow-x-scroll max-[900px]:overflow-x-scroll max-[900px]:w-[100%]'>
         <table className='m-auto mt-[10px]'>
           <thead>
-            <tr className='bg-gray-100 p-[20px] border-t-[2px] border-b-[2px]'>
+            <tr className='bg-gray-50 p-[20px] border-t-[2px] border-gray-100 border-b-[2px]'>
               <th className='p-[10px] text-center'>Isbn-10</th>
               <th className='p-[10px] text-center'>Isbn-13</th>
-              <th className='p-[10px] text-center'>Name <i onClick={()=>{
-                setBookData(bookData.sort())
-              }} class="fas fa-sort"></i></th>
+              <th className='p-[10px] text-center'>Name</th>
               <th className='p-[10px] text-center'>Category</th>
             
               <th className='p-[10px] text-center'>Price</th>
@@ -97,10 +95,10 @@ export default function Listbooks() {
                 <td className='p-[20px] text-center'>{data.isbn10}</td>
                 <td className='p-[20px] text-center'>{data.isbn13}</td>
                 <td className='p-[20px] text-center'>{data.name}</td>
-                <td className='p-[20px] text-center'>{data.category}</td>
+                <td className='p-[20px] text-center'><p className='bg-sky-100 w-[150px] rounded-[500px]'>{data.category}</p></td>
              
                 <td className='p-[20px] text-center'>{data.price}</td>
-                <td className='p-[20px] text-center'>{data.quantity}</td>
+                <td className='p-[20px] text-center '><p className='bg-green-200 rounded-[500px] w-[50px]'>{data.quantity}</p></td>
                 <td className='p-[20px] text-center'>{data.pages}</td>
                 <td className='p-[20px] text-center'>{data.author}</td>
                 <td className='p-[20px] text-center'>{data.publisher}</td>
