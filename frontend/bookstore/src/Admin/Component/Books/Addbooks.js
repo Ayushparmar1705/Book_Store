@@ -70,7 +70,7 @@ export default function Addbooks() {
         <div>
 
             <div className='w-[1000px] bg-white shadow-lg mt-[10px] m-auto text-center max-[900px]:flex flex-col max-[900px]:w-[100%] '>
-                <h1>ADD NEW BOOKS</h1>
+                <h1>ADD BOOK</h1>
                 <form>
                     <table className='m-auto text-left max-[900px]:w-[100%] '>
                         <tbody>
