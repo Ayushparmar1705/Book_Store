@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 import Footer from './Footer';
+import Loading from './Loading';
 export default function Home() {
     const [bookList, setBookList] = useState([]);
     const [category, setCategory] = useState([]);
@@ -105,7 +106,7 @@ export default function Home() {
             </div>
 
             {loading ? (
-                <img className='h-[200px] w-[200px] m-[auto]' src="./images/download.png" alt='No'></img>
+               <Loading/>
             ) : (
                 <div className='overflow-x-auto h-[500px] w-full'>
                     <div className='flex gap-5 h-[500px] px-4'>

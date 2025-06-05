@@ -133,6 +133,7 @@ export default function Shop() {
     const indexOfLastItems = currentPage * itemsPerPage;
     const indexOfFirstItems = indexOfLastItems - itemsPerPage;
     let currentItems = books.slice(indexOfFirstItems, indexOfLastItems);
+
     async function searchBook() {
 
 
@@ -151,25 +152,26 @@ export default function Shop() {
 
 
     }
+    const totalPages = Math.ceil(books.length / itemsPerPage);
     return (
         <div className='h-[100vh]'>
 
 
             <h1 className='text-center text-[30px]'>Shop</h1>
             <div className='text-center flex justify-center gap-[10px] max-[900px]:flex max-[900px]:flex-wrap max-[900px]:'>
-               <input
-                        value={bookname}
-                        onChange={(e) => setBookName(e.target.value)}
-                        type='search'
-                        className='border-[2px] outline-none border-gray-100 rounded-[10px] hover:outline-none w-[300px] p-[10px]'
-                        placeholder='Search book by name'
-                        onKeyDown={(e) => {
+                <input
+                    value={bookname}
+                    onChange={(e) => setBookName(e.target.value)}
+                    type='search'
+                    className='border-[2px] outline-none border-gray-100 rounded-[10px] hover:outline-none w-[300px] p-[10px]'
+                    placeholder='Search book by name'
+                    onKeyDown={(e) => {
 
-                            if (e.key === "Enter") {
-                                searchBook();
-                            }
-                        }}
-                    />
+                        if (e.key === "Enter") {
+                            searchBook();
+                        }
+                    }}
+                />
                 <div className='font-bold'>
                     <select className='p-[10px]' onChange={Sorting}>
                         <option value="" disabled>Default</option>
@@ -226,12 +228,13 @@ export default function Shop() {
                 </div>
                 {loading ? (
 
-                    <img className='h-[200px] w-[200px] ' src="./images/download.png" alt='No'></img>
+
+                   <Loading></Loading>
 
                 ) : (<div className='flex gap-[20px] flex-wrap'>
                     {currentItems.map((data) => (
                         <div key={data.id} className='mt-[10px] shadow-lg text-center  transition hover:scale-104 h-[300px] w-[300px] text-wrap rounded-[10px] p-[10px]'>
-                            <Link to={`/bookdetail/${data.id}`}><img className='rounded-[10px] h-[200px] w-[200px] m-[auto]' src={data.image} alt='Noimg'></img></Link>
+                            <Link><img className='rounded-[10px] h-[200px] w-[200px] m-[auto]' src={data.image} alt='Noimg'></img></Link>
                             <p className='break-words font-bold'>{data.name}</p>
 
                             <p className='font-bold'>₹ {data.price}</p>
@@ -245,14 +248,17 @@ export default function Shop() {
                 }
 
             </div>
-            <div className='w-[100%] flex'>
-                <button className='m-[auto] w-[100px] p-[10px] block bg-gray-200' onClick={() => {
-                    setCurrentPage(prev => prev - 1)
-                }}>Previous</button>
-                <button className='m-[auto] w-[100px] p-[10px] block bg-gray-200' onClick={() => {
-                    setCurrentPage(prev => prev + 1)
-                }}>Next</button>
 
+            <div className='flex justify-end gap-10'>
+                <button className='bg-gray-100 p-[10px] w-[100px]' onClick={() => {
+                    setCurrentPage(prev => prev - 1);
+                }} disabled={currentPage === 1}>Previous</button>
+                <button >{currentPage} of {totalPages}</button>
+
+                <button className='bg-gray-100 p-[10px] w-[100px]' onClick={() => {
+
+                    setCurrentPage(prev => prev + 1)
+                }} disabled={currentPage === totalPages}>Next</button>
             </div>
         </div>
 

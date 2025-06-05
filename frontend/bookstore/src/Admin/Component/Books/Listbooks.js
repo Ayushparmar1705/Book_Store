@@ -113,24 +113,17 @@ export default function Listbooks() {
         </table>
       </div>
 
-      {/* Pagination Controls */}
-      <div className='mt-4 flex justify-center gap-4'>
-        <button
-          disabled={currentPage === 1}
-          onClick={() => setCurrentPage(prev => prev - 1)}
-          className='p-2 border rounded disabled:opacity-50'
-        >
-          Prev
-        </button>
+      <div className='flex justify-end gap-10'>
+                    <button className='bg-gray-100 p-[10px] w-[100px]' onClick={() => {
+                        setCurrentPage(prev => prev - 1);
+                    }} disabled={currentPage === 1}>Previous</button>
+                    <button >{currentPage} of {totalPages}</button>
+                    
+                    <button className='bg-gray-100 p-[10px] w-[100px]' onClick={() => {
 
-        <button
-          disabled={currentPage === totalPages}
-          onClick={() => setCurrentPage(prev => prev + 1)}
-          className='p-2 border rounded disabled:opacity-50'
-        >
-          Next
-        </button>
-      </div>
+                        setCurrentPage(prev => prev + 1)
+                    }} disabled={currentPage === totalPages}>Next</button>
+                </div>
     </div>
   );
 }

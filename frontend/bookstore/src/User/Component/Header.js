@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import { Link, redirect, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 export default function Header() {
@@ -8,6 +8,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [username, setUserName] = useState("");
   const [token, setToken] = useState(null);
+  const location = useLocation();
 
   function Logoutfunc() {
     window.location.href = "/user-logout";
@@ -44,17 +45,17 @@ export default function Header() {
   }, [navigate]);
 
   return (
-    <header className="border-b-2 border-gray-100 px-4 sm:px-8 py-4 flex items-center justify-between">
+    <header className="border-b-2 border-gray-100 px-4 sm:px-8 py-4 flex items-center ml-[20px]">
       <div className="flex items-center gap-2">
        <Link to="/home"><img src='/images/download.png' alt='No found' className='h-20 w-20 w-auto'></img></Link>
       </div>
 
       {/* Desktop Navigation */}
-      <nav className="hidden md:flex items-center gap-6">
-        <Link to="/home" className="hover:border-b-2 border-black">Home</Link>
-        <Link to="/shop" className="hover:border-b-2 border-black">Shop</Link>
-        <Link to="/contact" className="hover:border-b-2 border-black">Contact</Link>
-        <Link to="/about" className="hover:border-b-2 border-black">About</Link>
+      <nav className="hidden md:flex gap-6 ml-[70px]">
+        <Link to="/home" className={`${location.pathname === '/home'?"text-blue-500":"text-black"}`}>Home</Link>
+       <Link to="/shop" className={`${location.pathname === '/shop'?"text-blue-500":"text-black"}`}>Shop</Link>
+        <Link to="/contact" className="hover:text-blue-500 border-black">Contact</Link>
+        <Link to="/about" className="hover:text-blue-500 border-black">About</Link>
       </nav>
 
       {/* Profile / Auth */}
@@ -64,7 +65,7 @@ export default function Header() {
         onClick={() => setOpen(!open)}
       >
         <p className="text-white font-medium transition-2">{username[0]?.toUpperCase()}</p></div>):(
-           <div className='p-[10px] m-[0px] flex'>
+           <div className='p-[10px] m-[0px] flex w-[100%] justify-end'>
              <Link to="/users/login" className="block p-[10px] hover:bg-gray-100  rounded">Login</Link>
                 <Link to="/users/signup" className="bg-blue-100 p-[10px] block hover:bg-gray-100  rounded ml-[10px]">Signup</Link>
            </div>
