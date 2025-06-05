@@ -1,16 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { } from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
-import {
-  LineChart,
-  ResponsiveContainer,
-  Legend,
-  Tooltip,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-} from "recharts";
+;
 
 export default function Dashboard() {
   const [bookData, setBookData] = useState([]);
@@ -21,7 +12,7 @@ export default function Dashboard() {
   useEffect(() => {
     async function fetchEverything() {
       const [books, users, orders] = await Promise.all([
-        fetch("http://localhost:8080/admin/bookslist"),
+        fetch("http://localhost:8080/admin/bookslist/10"),
         fetch("http://localhost:8080/getusers"),
         fetch("http://localhost:8080/admin/getallorders"),
       ])
@@ -33,7 +24,7 @@ export default function Dashboard() {
       setBookData(getBooks);
       setTotalbooks(getBooks);
       setTotalusers(getUsers.length);
-      setTotalOrders(getOrders.length);
+      setTotalOrders(getOrders);
     }
 
     fetchEverything();
@@ -136,8 +127,8 @@ export default function Dashboard() {
       </div>
 
       {/* Chart Section */}
-      <div className='bg-white rounded-xl shadow-md p-6 mb-8'>
-        <h2 className='text-xl font-semibold text-gray-800 mb-4'>Book Prices Overview</h2>
+      <div className='bg-white rounded-xl shadow-md p-6 mb-8 '>
+        <h2 className='text-xl font-semibold text-gray-800 mb-4 m-[auto]'>Book Prices Overview</h2>
         <div className='h-80'>
           <Bar data={barData} options={options} />
         </div>

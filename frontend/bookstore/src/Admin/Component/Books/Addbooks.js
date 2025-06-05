@@ -69,19 +69,12 @@ export default function Addbooks() {
     return (
         <div>
 
-            <div className='w-[1000px] bg-white shadow-lg mt-[10px] m-auto text-center max-[900px]:flex flex-col max-[900px]:w-[100%] '>
+            <div className='w-[700px] bg-white shadow-lg mt-[10px] m-auto text-center max-[900px]:flex flex-col max-[900px]:w-[100%] '>
                 <h1>ADD BOOK</h1>
                 <form>
                     <table className='m-auto text-left max-[900px]:w-[100%] '>
                         <tbody>
-                            <tr className='max-[900px]:flex flex-col'>
-                                <td className='p-[10px]'><label>Book Isbn-10</label></td>
-                                <td className='p-[10px]'><input required onChange={(e) => { setIsbn10(e.target.value) }} className='w-[250px] rounded-[10px] p-[10px] border-[2px] border-gray-300  focus:outline-none focus:border-fuchsia-500 focus:transition  duration-300 ease-in-out' type='text' placeholder='Enter book isbn-10' /></td>
-                            </tr>
-                            <tr className='max-[900px]:flex flex-col'>
-                                <td className='p-[10px]'><label>Book Isbn-13</label></td>
-                                <td className='p-[10px]'><input required onChange={(e) => { setIsbn13(e.target.value) }} className='w-[250px] rounded-[10px] p-[10px] border-[2px] border-gray-300 focus:outline-none focus:border-fuchsia-500 focus:transition  duration-300 ease-in-out' type='text' placeholder='Enter book isbn-13' /></td>
-                            </tr>
+
                             <tr className='max-[900px]:flex flex-col'>
                                 <td className='p-[10px]'><label>Book Name</label></td>
                                 <td className='p-[10px]'><input required onChange={(e) => { setName(e.target.value) }} className='w-[250px] rounded-[10px] p-[10px] border-[2px] border-gray-300 focus:outline-none focus:border-fuchsia-500 focus:transition  duration-300 ease-in-out' type='text' placeholder='Enter book name' /></td>
@@ -123,7 +116,14 @@ export default function Addbooks() {
                                 <td className='p-[10px]'><label>Book Publisher</label></td>
                                 <td className='p-[10px]'><input required onChange={(e) => { setPublisher(e.target.value) }} className='w-[250px] rounded-[10px] p-[10px] border-[2px] border-gray-300 focus:outline-none focus:border-fuchsia-500 focus:transition  duration-300 ease-in-out' type='text' placeholder='Enter book publisher' /></td>
                             </tr>
-
+                            <tr className='max-[900px]:flex flex-col'>
+                                <td className='p-[10px]'><label>Book Isbn-10</label></td>
+                                <td className='p-[10px]'><input onChange={(e) => { setIsbn10(e.target.value) }} className='w-[250px] rounded-[10px] p-[10px] border-[2px] border-gray-300  focus:outline-none focus:border-fuchsia-500 focus:transition  duration-300 ease-in-out' type='text' placeholder='Enter book isbn-10' /></td>
+                            </tr>
+                            <tr className='max-[900px]:flex flex-col'>
+                                <td className='p-[10px]'><label>Book Isbn-13</label></td>
+                                <td className='p-[10px]'><input onChange={(e) => { setIsbn13(e.target.value) }} className='w-[250px] rounded-[10px] p-[10px] border-[2px] border-gray-300 focus:outline-none focus:border-fuchsia-500 focus:transition  duration-300 ease-in-out' type='text' placeholder='Enter book isbn-13' /></td>
+                            </tr>
                             <tr className='max-[900px]:flex flex-col'>
                                 <td className='p-[10px]'><label>Publish Langauge</label></td>
                                 <td className='p-[10px]'><input required onChange={(e) => { setLangauge(e.target.value) }} className='w-[250px] rounded-[10px] p-[10px] border-[2px] border-gray-300 focus:outline-none focus:border-fuchsia-500 focus:transition  duration-300 ease-in-out' type='text' placeholder='Enter Book publish Langauge' /></td>

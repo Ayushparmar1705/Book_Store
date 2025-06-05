@@ -63,7 +63,7 @@ export default function Userlogin() {
         <Loading />
       ) : (
         <div className="w-full h-screen bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 flex justify-center items-center">
-          <div className='p-[30px] h-[auto] w-[450px] rounded-[6px] bg-fuchsia-300 text-center shadow-lg'>
+          <div className='p-[30px] h-[auto]  w-[450px] rounded-[6px] bg-skyblue-200 text-center shadow-lg'>
             <h1 className='font-bold text-[20px]'>Login</h1>
             <form onSubmit={handleLogin}>
               <table className='w-full p-[10px]'>
@@ -72,7 +72,7 @@ export default function Userlogin() {
                     <td className='p-[10px]'>
                       <input
                         onChange={validateEmail}
-                        className='w-[300px] transition focus:scale-110 rounded-[10px] p-[10px] border-[2px] focus:outline-none focus:border-rose-400 transition duration-300 ease-in-out'
+                        className='w-[300px] transition focus:scale-110  p-[10px] border-b-[2px] focus:outline-none focus:border-rose-400 transition duration-300 ease-in-out'
                         type='email'
                         placeholder='Enter your email'
                       />
@@ -83,7 +83,7 @@ export default function Userlogin() {
                     <td className='p-[10px]'>
                       <input
                         onChange={(e) => setPassword(e.target.value)}
-                        className='w-[300px] transition focus:scale-110 rounded-[10px] p-[10px] border-[2px] focus:outline-none focus:border-rose-400 transition duration-300 ease-in-out'
+                        className='w-[300px] transition focus:scale-110  p-[10px] border-b-[2px] focus:outline-none focus:border-rose-400 transition duration-300 ease-in-out'
                         type='password'
                         placeholder='Enter your password'
                       />

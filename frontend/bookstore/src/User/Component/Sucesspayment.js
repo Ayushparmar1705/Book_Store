@@ -33,7 +33,7 @@ export default function Sucesspayment() {
         {!orders.length > 0 && <div className='bg-green-300 p-[10px] text-center'> <a className='color-green-400' href='/shop'>Order Now</a></div>}
         {orders.map((data, index) => (
 
-          <div key={index} className='shadow-xl h-[400px] w-[900px] text-center m-[auto]'>
+          <div key={index} className='shadow-xl  w-[900px] text-center m-[auto]'>
 
             <div className='p-[10px]  text-center  w-[100%] border-[2px] border-gray-50 '>
               <table className='p-[10px] text-center  w-[100%]'>
@@ -65,6 +65,8 @@ export default function Sucesspayment() {
                         <p className='p-[10px]'>Name : {data.name}</p>
                         <p className='p-[10px]'>Quantity : {data.quantity}</p>
                         <p className='p-[10px]'>Price : {data.price}</p>
+                        <button className='bg-gray-100 p-[10px] '>Buy Now</button>
+                        <button className='bg-gray-100 p-[10px] ml-[10px]'>Review</button>
                       </div>
 
                     </div>

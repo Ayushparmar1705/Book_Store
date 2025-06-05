@@ -54,7 +54,7 @@ export default function Edituser() {
     return (
         <div className='p-[10px]'>
             <p className='text-center text-[20px]'>Update User</p>
-            <div className='bg-gray-50 shadow-xl w-[500px] p-[20px] m-[auto]'>
+            <div className='bg-grawhite shadow-xl w-[500px] p-[20px] m-[auto]'>
                 <form onSubmit={(e) => e.preventDefault()}>
                     <table className='m-[auto] p-[20px]'>
                         <tbody>
@@ -68,7 +68,7 @@ export default function Edituser() {
                                         onChange={getValue}
                                         type='text'
                                         placeholder='Enter first name'
-                                          className='border-[2px] border-black p-[10px]'
+                                        className='border-[2px] border-black p-[10px] outline-none border-gray-100 hover:outline-none'
                                     />
                                 </td>
                             </tr>
@@ -81,7 +81,7 @@ export default function Edituser() {
                                         onChange={getValue}
                                         type='text'
                                         placeholder='Enter last name'
-                                          className='border-[2px] border-black p-[10px]'
+                                          className='border-[2px] border-black p-[10px] outline-none border-gray-100 hover:outline-none'
                                     />
                                 </td>
                             </tr>
@@ -94,7 +94,7 @@ export default function Edituser() {
                                         onChange={getValue}
                                         type='email'
                                         placeholder='Enter email'
-                                          className='border-[2px] border-black p-[10px]'
+                                          className='border-[2px] border-black outline-none p-[10px] border-gray-100 hover:outline-none ' 
                                     />
                                 </td>
                             </tr>

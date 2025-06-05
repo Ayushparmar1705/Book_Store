@@ -18,7 +18,7 @@ export default function AdminHeader() {
     return (
         <header className="bg-white shadow-md px-6 py-4 flex max-[900px]:flex max-[900px]:flex-col">
             <div className="flex justify-between items-center">
-                <div className="text-xl font-bold text-blue-700"><img src='/images/download.png' alt='No found' className='h-20 w-20 w-auto'></img></div>
+                <div className="text-xl font-bold text-blue-700"><Link to="/Dashboard"><img src='/images/download.png' alt='No found' className='h-20 w-20 w-auto'></img></Link></div>
                 <button
                     className="md:hidden text-gray-700"
                     onClick={() => setMenuOpen(!menuOpen)}

@@ -13,7 +13,7 @@ export default function Listbooks() {
   const itemsPerPage = 5;
 
   async function Allbooks() {
-    const URL = "http://localhost:8080/admin/bookslist";
+    const URL = "http://localhost:8080/admin/bookslist/undefined";
     const data = await fetch(URL);
     const result = await data.json();
     setBookData(result);
@@ -31,7 +31,7 @@ export default function Listbooks() {
     console.log(bookname);
     if(bookname === "")
     {
-      setBookData(newdata) 
+      setBookData(newdata)
     }
     else
     {
@@ -104,7 +104,7 @@ export default function Listbooks() {
                 <td className='p-[20px] text-center'>{data.publisher}</td>
  
 
-                <td><img className='h-[100px] w-[100px]' src={`/${data.image}`} alt='NoImage' /></td>
+                <td><img className='h-[100px] w-[100px]' src={data.image} alt='NoImage' /></td>
                 <td className='p-[20px] text-center'><Link to={`/dashboard/deletebook/${data.id}`}><i class='fas fa-trash-alt'></i></Link></td>
                 <td className='p-[20px] text-center'><Link to={`/dashboard/onebook/${data.id}`}><i class="fa fa-edit" ></i></Link></td>
               </tr>

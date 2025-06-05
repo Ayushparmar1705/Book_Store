@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import Loading from './Loading';
 export default function Shop() {
@@ -13,7 +13,10 @@ export default function Shop() {
     const [loading, setLoading] = useState(false);
     const [startPrice, setStartPrice] = useState(0);
     const [endPrice, setEndPrice] = useState(0);
-    const [clearFilter , setClearFilter] = useState(false);
+
+
+
+
     async function Sorting(e) {
         setSorting(e.target.value)
         setLoading(true);
@@ -22,21 +25,21 @@ export default function Shop() {
             const data = await fetch(URL);
             const result = await data.json();
             setBooks(result);
-            console.log(books);
+
         }
         catch {
             console.log("Error");
             setLoading(false);
         }
         setLoading(false);
-        setClearFilter(true);
+
     }
 
 
     useEffect(() => {
 
         async function Shop() {
-            const URL = "http://localhost:8080/admin/bookslist";
+            const URL = "http://localhost:8080/admin/bookslist/undefined";
             setLoading(true);
             const data = await fetch(URL);
             const result = await data.json();
@@ -48,6 +51,8 @@ export default function Shop() {
 
 
         Shop();
+
+
         async function AllCategory() {
             const URL = "http://localhost:8080/admin/listcategory";
             try {
@@ -67,24 +72,7 @@ export default function Shop() {
 
     }, [])
 
-    async function searchBook(e) {
-        setBookName(e.target.value);
-        setClearFilter(true);
-        console.log(bookname.length)
-        if (bookname.length === 1) {
-            console.log(books);
-            setBooks(Allbooks);
-        }
-        else {
 
-            const URL = `http://localhost:8080/search/${bookname}`;
-            const data = await fetch(URL);
-            const result = await data.json();
-            setBooks(result);
-        }
-
-
-    }
     function isChecked(e) {
         const selectedValue = e.target.value;
         const isALredyChecked = selectedCheckbox === selectedValue;
@@ -93,7 +81,7 @@ export default function Shop() {
 
         console.log(e.target.value)
 
-        setClearFilter(true);
+
 
 
         if (isALredyChecked) {
@@ -102,7 +90,7 @@ export default function Shop() {
         else {
             let filterBooks = books.filter((result) => {
                 if (result["category"] === e.target.value) {
-                        return result;
+                    return result;
                 }
                 return 0;
 
@@ -119,7 +107,7 @@ export default function Shop() {
 
 
     async function FilterByPrice(e) {
-        setClearFilter(true);
+
         if (parseInt(startPrice) === 0 && parseInt(endPrice) === 0) {
             alert("Invalid start and end price");
         }
@@ -138,16 +126,50 @@ export default function Shop() {
             }
         }
     }
+    const [currentPage, setCurrentPage] = useState(1);
+
+
+    const itemsPerPage = 5;
+    const indexOfLastItems = currentPage * itemsPerPage;
+    const indexOfFirstItems = indexOfLastItems - itemsPerPage;
+    let currentItems = books.slice(indexOfFirstItems, indexOfLastItems);
+    async function searchBook() {
+
+
+        console.log(bookname.length)
+        if (bookname.length === 0) {
+
+            currentItems = Allbooks.slice(indexOfFirstItems, indexOfLastItems);
+        }
+        else {
+
+            const URL = `http://localhost:8080/search/${bookname}`;
+            const data = await fetch(URL);
+            const result = await data.json();
+            setBooks(result);
+        }
+
+
+    }
     return (
         <div className='h-[100vh]'>
 
 
             <h1 className='text-center text-[30px]'>Shop</h1>
             <div className='text-center flex justify-center gap-[10px] max-[900px]:flex max-[900px]:flex-wrap max-[900px]:'>
-                <form onChange={searchBook}>
-                    <input className='border-[2px] p-[10px] w-[400px] max-[900px]:w-[200px] border-gray-100 focus:outline-none '  type='search' placeholder='Search book by book name' ></input>
+               <input
+                        value={bookname}
+                        onChange={(e) => setBookName(e.target.value)}
+                        type='search'
+                        className='border-[2px] outline-none border-gray-100 rounded-[10px] hover:outline-none w-[300px] p-[10px]'
+                        placeholder='Search book by name'
+                        onKeyDown={(e) => {
 
-                </form>
+                            if (e.key === "Enter") {
+                                searchBook();
+                            }
+                        }}
+                    />
                 <div className='font-bold'>
                     <select className='p-[10px]' onChange={Sorting}>
                         <option value="" disabled>Default</option>
@@ -168,10 +190,10 @@ export default function Shop() {
                     {isOpen && (
                         <div className='w-[300px] bg-white shadow-xl p-[20px]  border-[2px] border-yellow-100'>
 
-                        
+
                             <p className='border-b-[2px] text-center'>By Category</p>
                             {
-                                
+
                                 category.map((data) => (
 
                                     <div className='cursor-pointer   flex  p-[10px]' key={data.id}>
@@ -192,7 +214,7 @@ export default function Shop() {
                             <p className='border-b-[2px] text-center'>By Price</p>
                             <div className='flex  mt-[10px]  gap-[2px] items-center'>
                                 <p>Start</p>
-                                <input  value={startPrice} onChange={(e) => { setStartPrice(e.target.value) }} type='number' min={1} className='border-[3px] w-[100px] p-[10px] border-gray-50 '></input>
+                                <input value={startPrice} onChange={(e) => { setStartPrice(e.target.value) }} type='number' min={1} className='border-[3px] w-[100px] p-[10px] border-gray-50 '></input>
                                 <p>End</p>
                                 <input value={endPrice} onChange={(e) => { setEndPrice(e.target.value) }} type='number' min={1} className='border-[3px] w-[100px] p-[10px] border-gray-50 '></input>
 
@@ -204,12 +226,12 @@ export default function Shop() {
                 </div>
                 {loading ? (
 
-                    <Loading />
+                    <img className='h-[200px] w-[200px] ' src="./images/download.png" alt='No'></img>
 
                 ) : (<div className='flex gap-[20px] flex-wrap'>
-                    {books.map((data) => (
+                    {currentItems.map((data) => (
                         <div key={data.id} className='mt-[10px] shadow-lg text-center  transition hover:scale-104 h-[300px] w-[300px] text-wrap rounded-[10px] p-[10px]'>
-                            <Link to={`/bookdetail/${data.id}`}><img className='rounded-[10px] h-[200px] w-[200px] m-[auto]' src={`http://localhost:3000/${data.image}`} alt='Noimg'></img></Link>
+                            <Link to={`/bookdetail/${data.id}`}><img className='rounded-[10px] h-[200px] w-[200px] m-[auto]' src={data.image} alt='Noimg'></img></Link>
                             <p className='break-words font-bold'>{data.name}</p>
 
                             <p className='font-bold'>₹ {data.price}</p>
@@ -221,8 +243,17 @@ export default function Shop() {
 
 
                 }
-            </div>
 
+            </div>
+            <div className='w-[100%] flex'>
+                <button className='m-[auto] w-[100px] p-[10px] block bg-gray-200' onClick={() => {
+                    setCurrentPage(prev => prev - 1)
+                }}>Previous</button>
+                <button className='m-[auto] w-[100px] p-[10px] block bg-gray-200' onClick={() => {
+                    setCurrentPage(prev => prev + 1)
+                }}>Next</button>
+
+            </div>
         </div>
 
 

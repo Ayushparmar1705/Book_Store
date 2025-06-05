@@ -98,7 +98,7 @@ export default function Updatebook() {
     return (
         <div>
             <div className='w-[700px] shadow mt-[10px] m-auto text-center max-[900px]:flex flex-col max-[900px]:w-[100%] '>
-                <h1>UPDATE BOOKS</h1>
+                <h1>UPDATE BOOK</h1>
                 <form onSubmit={updateBooks}>
                     <table className='m-auto max-[900px]:w-[100%] '>
                         <tbody>

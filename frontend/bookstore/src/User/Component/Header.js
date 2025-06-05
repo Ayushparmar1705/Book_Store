@@ -46,7 +46,7 @@ export default function Header() {
   return (
     <header className="border-b-2 border-gray-100 px-4 sm:px-8 py-4 flex items-center justify-between">
       <div className="flex items-center gap-2">
-       <img src='/images/download.png' alt='No found' className='h-20 w-20 w-auto'></img>
+       <Link to="/home"><img src='/images/download.png' alt='No found' className='h-20 w-20 w-auto'></img></Link>
       </div>
 
       {/* Desktop Navigation */}

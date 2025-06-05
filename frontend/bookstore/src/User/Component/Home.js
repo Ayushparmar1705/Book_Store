@@ -1,45 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import Loading from './Loading';
-import Footer from './Footer';
 
+import Footer from './Footer';
 export default function Home() {
     const [bookList, setBookList] = useState([]);
     const [category, setCategory] = useState([]);
     const [filterCategory, setFilterCategory] = useState([]);
     const [loading, setLoading] = useState(false);
+    const itemsPerPage = 30;
+
+
+
+
+
+
 
     useEffect(() => {
-        async function AllProducts() {
+
+        async function fetchEverything() {
             setLoading(true);
             try {
-                const response = await fetch("http://localhost:8080/admin/bookslist");
-                const result = await response.json();
-                setBookList(result);
-                setFilterCategory(result);
-            } catch (error) {
-                console.error("Error fetching books:", error);
-            } finally {
+                const [books, category] = await Promise.all([
+                    fetch(`http://localhost:8080/admin/bookslist/${itemsPerPage}`),
+                    fetch("http://localhost:8080/admin/listcategory"),
+
+                ])
+                const [getBooks, getCategory] = await Promise.all([
+                    books.json(),
+                    category.json(),
+                ])
+                setBookList(getBooks);
+                setCategory(getCategory);
+                setLoading(false);
+                setFilterCategory(getBooks);
+
+            }
+            catch (e) {
+
                 setLoading(false);
             }
         }
+        fetchEverything();
 
-        async function AllCategory() {
-            try {
-                const response = await fetch("http://localhost:8080/admin/listcategory");
-                const result = await response.json();
-                setCategory(result);
-            } catch (error) {
-                console.error("Error fetching categories:", error);
-            }
-        }
-
-        AllProducts();
-        AllCategory();
     }, []);
 
+
     function FilterBooks(e) {
+
         const selected = e.target.value;
         if (selected === "All") {
             setFilterCategory(bookList);
@@ -48,6 +56,7 @@ export default function Home() {
             setFilterCategory(filtered);
         }
     }
+
 
     return (
 
@@ -76,7 +85,7 @@ export default function Home() {
                 <button
                     onClick={FilterBooks}
                     value="All"
-                    className='font-bold text-sm bg-pink-200 px-4 py-2 rounded-lg hover:bg-pink-300'
+                    className='font-bold text-sm bg-black text-white w-[100px] px-4 py-2 rounded-lg'
                 >
                     All
                 </button>
@@ -86,6 +95,7 @@ export default function Home() {
                             key={cat.id}
                             value={cat.category_name}
                             onClick={FilterBooks}
+
                             className='font-bold text-sm bg-white hover:bg-gray-50 shadow-sm px-4 py-2 rounded-lg'
                         >
                             {cat.category_name}
@@ -95,19 +105,24 @@ export default function Home() {
             </div>
 
             {loading ? (
-                <Loading />
+                <img className='h-[200px] w-[200px] m-[auto]' src="./images/download.png" alt='No'></img>
             ) : (
                 <div className='overflow-x-auto h-[500px] w-full'>
                     <div className='flex gap-5 h-[500px] px-4'>
                         {filterCategory.length > 0 ? (
                             filterCategory.map((book) => (
-                                <div key={book.id} className='shadow-lg hover:shadow-yellow-500 hover:scale-105 transition-transform duration-300 rounded-lg text-center p-4 h-[400px] w-[300px] flex-shrink-0'>
+                                <div key={book.id} className='shadow-lg  hover:scale-105 transition-transform duration-300 rounded-lg text-center p-4 h-[400px] w-[300px] flex-shrink-0'>
                                     <Link to={`/bookdetail/${book.id}`}>
+                                        {/* <img
+                                            src={`http://localhost:3000/${book.image}`}
+                                            alt={book.name}
+                                            className='w-full h-48 object-contain mx-auto rounded-lg h-[300px] w-[300px] mx-auto object-contain '
+                                        /> */}
                                         <img
-  src={`http://localhost:3000/${book.image}`}
-  alt={book.name}
-  className='rounded-lg h-[300px] w-[300px] mx-auto object-contain bg-gray-100 border border-gray-300'
-/>
+                                            src={book.image}
+                                            alt={book.name}
+                                            className='w-full h-48 object-contain mx-auto rounded-lg h-[300px] w-[300px] mx-auto object-contain '
+                                        />
 
                                     </Link>
                                     <p>{book.category}</p>
@@ -155,20 +170,20 @@ export default function Home() {
                 </motion.div>
             </div>
             <div className='grid grid-cols-12 p-[10px] gap-[40px] max-[900px]:flex max-[900px]:flex-col max-[900px]:w-[100%]'>
-                <div className='flex flex-col justify-center  items-center col-span-4 border-[2px] border-gray-100 h-[100px] p-[10px] text-center shadow-xl'>
-                    <p className='font-bold'>Free Delivery</p>
+                <div className='rounded-[10px] flex flex-col justify-center  items-center col-span-4 border-[2px] border-gray-100 h-[100px] p-[10px] text-center shadow-xl'>
+                    <p className='font-bold ]'>Free Delivery</p>
                     <p>Free Delivery Upto order ₹ 2000</p>
                 </div>
-                <div className='flex flex-col justify-center col-span-4 border-[2px] border-gray-100 h-[100px] p-[10px] text-center shadow-xl'>
+                <div className='rounded-[10px] flex flex-col justify-center col-span-4 border-[2px] border-gray-100 h-[100px] p-[10px] text-center shadow-xl'>
                     <p className='font-bold'>Secure Payment</p>
                     <p>Provide 100% Secure Payment Service</p>
                 </div>
-                <div className='flex flex-col justify-center col-span-4 border-[2px] border-gray-100 h-[100px] p-[10px] text-center shadow-xl'>
+                <div className='rounded-[10px]  flex-col justify-center col-span-4 border-[2px] border-gray-100 h-[100px] p-[10px] text-center shadow-xl'>
                     <p className='font-bold'>Money Back</p>
                     <p>Refund the Money within 2 days</p>
                 </div>
             </div>
-            <div className='flex justify-center items-center gap-50 bg-gray-100 shadow-xl w-[100%] mt-[10px] max-[900px]:flex max-[900px]:flex-col max-[900px]:w-[100%] max-[900px]:justify-right max-[900px]:m-[0px] max-[900px]:text-center'>
+            <div className='flex justify-center items-center gap-50 bg-white  shadow w-[100%] mt-[10px] max-[900px]:flex max-[900px]:flex-col max-[900px]:w-[100%] max-[900px]:justify-right max-[900px]:m-[0px] max-[900px]:text-center'>
                 <div>
                     <p className='font-bold text-[40px]'>GET 20% DISCOUNT</p>
                     <button className='bg-black text-white p-[10px] rounded-[5px] w-[120px] mt-[10px]'>Buy Now</button>

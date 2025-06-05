@@ -13,6 +13,7 @@ export default function Deletebooks() {
         if(data.ok)
         {
             alert(result.message);
+            
         }
         else
         {

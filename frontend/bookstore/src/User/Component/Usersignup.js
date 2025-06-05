@@ -25,13 +25,13 @@ export default function Usersignup() {
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
         if (firstname === "" || !fnrexgex.test(firstname)) {
-            alert('First name is required and firstname allowed only letters');
+            alert('Enter the Valid First Name');
         }
         else if (lastname === "" || !lnregex.test(lastname)) {
-            alert("Last name is required and lasr name allowed only letters");
+            alert("Enter the Valid Last Name");
         }
         else if (email === "") {
-            alert("Invalid email")
+            alert("Enter Valid Email")
         }
         else if (password === "" || !passwordRegex.test(password)) {
             alert("Password must be contains 8 digit long , including letters , a number , and a speical character");
@@ -61,21 +61,21 @@ export default function Usersignup() {
     return (
         <div className="w-full h-screen bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 flex  items-center">
 
-            <div className=' form p-[30px] h-[400px] w-[450px] rounded-[6px] bg-fuchsia-300   text-center shadow-lg ml-[100px]'>
+            <div className=' form p-[30px] h-[400px] w-[450px] rounded-[6px] bg-skyblue-200  n text-center shadow-lg ml-[100px]'>
                 <h1 className='font-bold text-[20px]'>Sign Up</h1>
                 <form onSubmit={handlesignup}>
                     <table className='p-[10px]  w-full'>
                         <tr className='p-[10px]'>
-                            <td className='p-[10px]'><input onChange={(e) => { setFirstName(e.target.value) }} className='w-[300px] rounded-[10px] p-[10px] border-[2px] focus:outline-none focus:bor der-purple-900 focus:transition  duration-300 ease-in-out transition focus:scale-110' type='text' placeholder='Enter your firstname'></input></td>
+                            <td className='p-[10px]'><input onChange={(e) => { setFirstName(e.target.value) }} className='w-[300px]  p-[10px] border-b-[2px]  focus:outline-none focus:bor der-purple-900 focus:transition  duration-300 ease-in-out transition focus:scale-110' type='text' placeholder='Enter your firstname'></input></td>
                         </tr>
                         <tr className='p-[10px]'>
-                            <td className='p-[10px]'><input onChange={(e) => { setLastname(e.target.value) }} className='w-[300px] rounded-[10px] p-[10px] border-[2px] focus:outline-none focus:border-purple-900 focus:transition  duration-300 ease-in-out transition focus:scale-110' type='text' placeholder='Enter your lastname'></input></td>
+                            <td className='p-[10px]'><input onChange={(e) => { setLastname(e.target.value) }} className='w-[300px]  p-[10px] border-b-[2px] focus:outline-none focus:border-purple-900 focus:transition  duration-300 ease-in-out transition focus:scale-110' type='text' placeholder='Enter your lastname'></input></td>
                         </tr>
                         <tr className='p-[10px]'>
-                            <td className='p-[10px]'><input onChange={(e) => { setEmail(e.target.value) }} className='w-[300px] rounded-[10px] p-[10px] border-[2px] focus:outline-none focus:border-purple-900 focus:transition  duration-300 ease-in-out transition focus:scale-110' type='email' placeholder='Enter your email'></input></td>
+                            <td className='p-[10px]'><input onChange={(e) => { setEmail(e.target.value) }} className='w-[300px]  p-[10px] border-b-[2px] focus:outline-none focus:border-purple-900 focus:transition  duration-300 ease-in-out transition focus:scale-110' type='email' placeholder='Enter your email'></input></td>
                         </tr>
                         <tr className='p-[10px]'>
-                            <td className='p-[10px]'><input onChange={(e) => { setPassword(e.target.value) }} className='w-[300px] rounded-[10px] p-[10px] border-[2px] focus:outline-none focus:border-purple-900 focus:transition  duration-300 ease-in-out transition focus:scale-110' type='password' placeholder='Enter your password'></input></td>
+                            <td className='p-[10px]'><input onChange={(e) => { setPassword(e.target.value) }} className='w-[300px]  p-[10px] border-b-[2px] focus:outline-none focus:border-purple-900 focus:transition  duration-300 ease-in-out transition focus:scale-110' type='password' placeholder='Enter your password'></input></td>
                         </tr>
                     </table>
                     <button className='bg-black text-white hover:bg-rose-400 w-[200px] p-[5px] rounded-[4px] shadow-xl'>Sign Up</button>

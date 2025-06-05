@@ -1,74 +1,83 @@
 import random
 from faker import Faker
 import mysql.connector
-from datetime import datetime
+from datetime import date, timedelta
+# ──────────────────────────────────────────────────────────────────────────
+
+TOTAL_BOOKS = 1_000          # ← change here if you want even more
+PRICE_MIN, PRICE_MAX = 5, 150
+PAGES_MIN, PAGES_MAX = 100, 1_000
+YEARS_BACK = 10              # publish-date window
+BATCH_SIZE = 1_000           # keep this ≤ TOTAL_BOOKS
+
+CATEGORIES = [
+    "Coding", "Fiction", "Non-Fiction", "Romance",
+    "Science_Fiction", "Horror", "Love", "Mythical Nature"
+]
+LANGUAGES = ["English", "Hindi", "Spanish", "French", "German"]
 
 fake = Faker()
 
-# Connect to MySQL database
+# ───────────────  helpers ────────────────
+randdigit = lambda n: "".join(random.choices("0123456789", k=n))
+
+def fake_isbn10():  return randdigit(10)
+def fake_isbn13():  return randdigit(13)
+
+def fake_publish_date():
+    start = date.today() - timedelta(days=YEARS_BACK * 365)
+    return fake.date_between(start, "today")
+
+def fake_image(isbn13):
+    # deterministic cover so you never cache-miss
+    return f"https://picsum.photos/seed/{isbn13}/200/300"
+
+def build_row():
+    isbn13 = fake_isbn13()
+    return (
+        fake_isbn10(),
+        isbn13,
+        fake.sentence(nb_words=4).rstrip("."),
+        random.choice(CATEGORIES),
+        fake.paragraph(nb_sentences=3),
+        round(random.uniform(PRICE_MIN, PRICE_MAX), 2),
+        random.randint(0, 50),                       # quantity
+        random.randint(PAGES_MIN, PAGES_MAX),
+        fake.name(),                                 # author
+        fake.company(),                              # publisher
+        fake_publish_date(),
+        random.choice(LANGUAGES),
+        fake_image(isbn13),
+    )
+
+# ───────────────  MySQL insert ────────────────
 db = mysql.connector.connect(
-    host="localhost",             # Change if needed
-    user="root",                  # Replace with your MySQL username
-    password="Ayush#2004",        # Replace with your MySQL password
-    database="ebook"              # Replace with your database name
+    host="localhost",
+    user="root",
+    password="Ayush#2004",
+    database="ebook"
 )
 cursor = db.cursor()
 
-# Your predefined categories
-categories = [
-    'Coding',
-    'Fiction',
-    'Non-Fiction',
-    'Romance',
-    'Science_Fiction',
-    'Horror',
-    'Love',
-    'Mythical Nature'
-]
+INSERT_SQL = """
+INSERT INTO products (
+    isbn10, isbn13, name, category, description, price, quantity, pages,
+    author, publisher, publish_date, langauge, image
+) VALUES (
+    %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s
+)
+"""
 
-languages = ['English', 'Hindi', 'Spanish', 'French', 'German']
+rows = [build_row() for _ in range(TOTAL_BOOKS)]
+cursor.executemany(INSERT_SQL, rows)
+db.commit()
 
-# Helper functions
-def generate_isbn10():
-    return ''.join([str(random.randint(0, 9)) for _ in range(10)])
-
-def generate_isbn13():
-    return ''.join([str(random.randint(0, 9)) for _ in range(13)])
-
-# Insert books
-def insert_books(n=300):
-    for i in range(n):
-        isbn10 = generate_isbn10()
-        isbn13 = generate_isbn13()
-        name = fake.sentence(nb_words=4).replace('.', '')
-        category = random.choice(categories)
-        description = fake.paragraph(nb_sentences=3)
-        price = round(random.uniform(5, 150), 2)
-        quantity = random.randint(0, 50)
-        pages = random.randint(100, 1000)
-        author = fake.name()
-        publisher = fake.company()
-        publish_date = fake.date_between(start_date='-10y', end_date='today')
-        language = random.choice(languages)
-        image = f"https://picsum.photos/seed/{random.randint(1000,9999)}/200/300"
-
-        sql = """
-        INSERT INTO products (
-            isbn10, isbn13, name, category, description, price, quantity, pages,
-            author, publisher, publish_date, langauge, image
-        ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """
-        values = (
-            isbn10, isbn13, name, category, description, price, quantity, pages,
-            author, publisher, publish_date, language, image
-        )
-
-        cursor.execute(sql, values)
-
-        if (i + 1) % 50 == 0:
-            print(f"{i + 1} records inserted...")
-
-    db.commit()
-    print(f"✅ {n} records inserted successfully!")
-
-insert_books(300)
+print(f"✅ Seeded {TOTAL_BOOKS:,} books with online cover images.")
+def fake_image(isbn13, category):
+    keywords = {
+        "Science_Fiction": "space",
+        "Horror": "dark",
+        "Romance": "love",
+        # …
+    }.get(category, "book")
+    return f"https://source.unsplash.com/400x600/?{keywords},{isbn13}"
