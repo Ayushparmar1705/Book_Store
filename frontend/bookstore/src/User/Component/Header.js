@@ -46,64 +46,64 @@ export default function Header() {
 
   return (
     <header className="border-b-2 border-gray-100 px-4 sm:px-8 py-4 flex items-center ml-[20px]">
-      <div className="flex items-center gap-2">
-       <Link to="/home"><img src='/images/download.png' alt='No found' className='h-20 w-20 w-auto'></img></Link>
+      <div className="flex  gap-2">
+        <Link to="/home"><img src='/images/download.png' alt='No found' className='h-20 w-20 w-auto'></img></Link>
       </div>
 
       {/* Desktop Navigation */}
-      <nav className="hidden md:flex gap-6 ml-[70px]">
-        <Link to="/home" className={`${location.pathname === '/home'?"text-blue-500":"text-black"}`}>Home</Link>
-       <Link to="/shop" className={`${location.pathname === '/shop'?"text-blue-500":"text-black"}`}>Shop</Link>
+      <nav className="hidden flex md:flex gap-6 ml-[70px]">
+        <Link to="/home" className={`${location.pathname === '/home' ? "text-blue-500" : "text-black"}`}>Home</Link>
+        <Link to="/shop" className={`${location.pathname === '/shop' ? "text-blue-500" : "text-black"}`}>Shop</Link>
         <Link to="/contact" className="hover:text-blue-500 border-black">Contact</Link>
         <Link to="/about" className="hover:text-blue-500 border-black">About</Link>
       </nav>
 
       {/* Profile / Auth */}
-      
-      {username.length>0 ? (  <div
+
+      {username.length > 0 ? (<div
         className="rounded-full bg-gradient-to-br from-sky-200 via-blue-400 to-indigo-900 w-[30px] h-[30px] flex items-center justify-center cursor-pointer"
         onClick={() => setOpen(!open)}
       >
-        <p className="text-white font-medium transition-2">{username[0]?.toUpperCase()}</p></div>):(
-           <div className='p-[10px] m-[0px] flex w-[100%] justify-end'>
-             <Link to="/users/login" className="block p-[10px] hover:bg-gray-100  rounded">Login</Link>
-                <Link to="/users/signup" className="bg-blue-100 p-[10px] block hover:bg-gray-100  rounded ml-[10px]">Signup</Link>
-           </div>
+        <p className="text-white font-medium transition-2">{username[0]?.toUpperCase()}</p></div>) : (
+        <div className='p-[10px] m-[0px] flex w-[100%] justify-end'>
+          <Link to="/users/login" className="block p-[10px] hover:bg-gray-100  rounded">Login</Link>
+          <Link to="/users/signup" className="bg-blue-100 p-[10px] block hover:bg-gray-100  rounded ml-[10px]">Signup</Link>
+        </div>
       )}
 
-        {open && (
-          <div className="absolute right-0 top-20 w-[200px] bg-white p-4 rounded-md shadow-lg z-20 text-center rounded-[5px]">
-            {token && (
-              <>
-                <p className="text-sm">Signin as a <span className='text-blue-900'>{username}</span></p>
+      {open && (
+        <div className="absolute right-0 top-20 w-[200px] bg-white p-4 rounded-md shadow-lg z-20 text-center rounded-[5px]">
+          {token && (
+            <>
+              <p className="text-sm">Signin as a <span className='text-blue-900'>{username}</span></p>
 
-                <div className='flex items-center p-[5px]'>
-                  <i className='fas fa-user w-[50px]'></i>
-                  <Link to="/profile" className="block w-[full]">Profile</Link>
-                </div>
-                <div className='flex items-center  p-[5px]'>
-                  <i className='fas fa-shopping-cart w-[50px]'></i>
-                  <Link to="/user-cart" className="block w-[full]">Cart</Link>
-                </div>
-                <div className='flex items-center  p-[5px]'>
-                  <i className='fas fa-clipboard-list  w-[50px]'></i>
-                  <Link to="/success" className="block w-[full]">Your Orders</Link>
-                </div><hr></hr>
-                <div className='flex items-center  p-[5px]'>
-                  <i className='fas fa-sign-out w-[50px]'></i>
-                  <button onClick={Logoutfunc} className="block w-[full]">Logout</button>
-                </div>
+              <div className='flex items-center p-[5px]'>
+                <i className='fas fa-user w-[50px]'></i>
+                <Link to="/profile" className="block w-[full]">Profile</Link>
+              </div>
+              <div className='flex items-center  p-[5px]'>
+                <i className='fas fa-shopping-cart w-[50px]'></i>
+                <Link to="/user-cart" className="block w-[full]">Cart</Link>
+              </div>
+              <div className='flex items-center  p-[5px]'>
+                <i className='fas fa-clipboard-list  w-[50px]'></i>
+                <Link to="/success" className="block w-[full]">Your Orders</Link>
+              </div><hr></hr>
+              <div className='flex items-center  p-[5px]'>
+                <i className='fas fa-sign-out w-[50px]'></i>
+                <button onClick={Logoutfunc} className="block w-[full]">Logout</button>
+              </div>
 
-              </>
-            )}
-          </div>
-        )}
+            </>
+          )}
+        </div>
+      )}
 
-        {/* Hamburger Icon */}
-        <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-   
+      {/* Hamburger Icon */}
+      <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
+        {menuOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+
 
       {/* Mobile Menu */}
       {menuOpen && (

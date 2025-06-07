@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { } from 'chart.js/auto';
-import { Bar } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 ;
 
 export default function Dashboard() {
@@ -9,27 +9,33 @@ export default function Dashboard() {
   const [TotalUsers, setTotalusers] = useState("");
   const [totalOrder, setTotalOrders] = useState([]);
 
+
   useEffect(() => {
     async function fetchEverything() {
       const [books, users, orders] = await Promise.all([
-        fetch("http://localhost:8080/admin/bookslist/10"),
+        fetch("http://localhost:8080/admin/bookslist/undefined"),
         fetch("http://localhost:8080/getusers"),
         fetch("http://localhost:8080/admin/getallorders"),
+
       ])
       const [getBooks, getUsers, getOrders] = await Promise.all([
         books.json(),
         users.json(),
         orders.json(),
+
       ])
       setBookData(getBooks);
       setTotalbooks(getBooks);
       setTotalusers(getUsers.length);
       setTotalOrders(getOrders);
+
     }
 
     fetchEverything();
   }, [])
-
+  useEffect(() => {
+    console.log(totalOrder);
+  })
   const options = {
     responsive: true,
     plugins: {
@@ -48,7 +54,7 @@ export default function Dashboard() {
       y: {
         beginAtZero: true,
         ticks: {
-          stepSize: 250,
+          stepSize: 50,
         },
         grid: {
           color: 'rgba(0, 0, 0, 0.05)',
@@ -61,13 +67,33 @@ export default function Dashboard() {
       }
     }
   }
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  const indexOfLastItems = currentPage * itemsPerPage;
+  const indexOfFirstItems = indexOfLastItems - itemsPerPage;
+  const currentItems = bookData.slice(indexOfFirstItems, indexOfLastItems);
 
+  const totalPages = Math.ceil(bookData.length / itemsPerPage)
   const barData = {
-    labels: bookData.map((data) => { return data.name }),
+    labels: currentItems.map((data) => { return data.name }),
     datasets: [
       {
-        label: "Price ($)",
-        data: bookData.map((data) => { return data.price }),
+        label: "Price",
+        data: currentItems.map((data) => { return data.price }),
+        backgroundColor: 'rgba(99, 102, 241, 0.7)',
+        borderColor: 'rgba(99, 102, 241, 1)',
+        borderWidth: 2,
+        borderRadius: 10,
+        hoverBackgroundColor: "rgba(99, 102, 241, 0.9)",
+      },
+    ]
+  };
+  const getOrderBardata = {
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"],
+    datasets: [
+      {
+        label: "Price",
+        data: totalOrder.map((data) => { return data.amount }),
         backgroundColor: 'rgba(99, 102, 241, 0.7)',
         borderColor: 'rgba(99, 102, 241, 1)',
         borderWidth: 2,
@@ -80,7 +106,7 @@ export default function Dashboard() {
   return (
     <div className='p-6 bg-gray-50 min-h-screen'>
       <h1 className='text-3xl font-bold text-gray-800 mb-8'>Admin Dashboard</h1>
-      
+
       {/* Stats Cards */}
       <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mb-8'>
         <div className='bg-white rounded-xl shadow-md p-6 transition-all hover:shadow-lg'>
@@ -127,11 +153,15 @@ export default function Dashboard() {
       </div>
 
       {/* Chart Section */}
-      <div className='bg-white rounded-xl shadow-md p-6 mb-8 '>
-        <h2 className='text-xl font-semibold text-gray-800 mb-4 m-[auto]'>Book Prices Overview</h2>
-        <div className='h-80'>
+      <div className='bg-white rounded-xl shadow-md p-6 mb-8  flex gap-20'>
+ 
+        <div className='h-100 w-150 p-[10px]'>
           <Bar data={barData} options={options} />
         </div>
+        <div className='h-100 w-150'>
+          <Line data={getOrderBardata} options={options} />
+        </div>
+
       </div>
 
       {/* Books Table */}
@@ -151,7 +181,7 @@ export default function Dashboard() {
                 </tr>
               </thead>
               <tbody className='bg-white divide-y divide-gray-200'>
-                {Totalbooks.map((data) => (
+                {currentItems.map((data) => (
                   <tr key={data.id} className='hover:bg-gray-50'>
                     <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>{data.name}</td>
                     <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>₹{data.price}</td>
@@ -163,6 +193,18 @@ export default function Dashboard() {
                 ))}
               </tbody>
             </table>
+          </div>
+
+          <div className='flex justify-end gap-10'>
+            <button className='bg-gray-100 p-[10px] w-[100px]' onClick={() => {
+              setCurrentPage(prev => prev - 1);
+            }} disabled={currentPage === 1}>Previous</button>
+            <button >{currentPage} of {totalPages}</button>
+
+            <button className='bg-gray-100 p-[10px] w-[100px]' onClick={() => {
+
+              setCurrentPage(prev => prev + 1)
+            }} disabled={currentPage === totalPages}>Next</button>
           </div>
         </div>
       </div>

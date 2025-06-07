@@ -42,6 +42,7 @@ export default function Checkout() {
         "address": address,
         "blockno": block,
         "products": result,
+
     }
 
     async function getCheckout() {
@@ -72,7 +73,7 @@ export default function Checkout() {
 
             const { id } = await response.json(); // Get the session ID
             console.log(id);
-            alert("Session id", id);
+           
             // Use Stripe's redirectToCheckout method
             const stripe = await stripePromise;
             sessionStorage.setItem("session_id", id);
@@ -89,7 +90,7 @@ export default function Checkout() {
         } catch (error) {
             console.error('Error during fetch:', error);
         }
-
+    
 
     }
 
