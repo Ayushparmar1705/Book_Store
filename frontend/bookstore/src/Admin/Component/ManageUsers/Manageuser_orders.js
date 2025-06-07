@@ -6,7 +6,7 @@ export default function Manageuser_orders() {
   const [items , setItems] = useState([]);
   useEffect(() => {
     async function fetchOrders() {
-      const URL = `http://localhost:8080/admin/manageorder`;
+      const URL = `http://localhost:8080/admin/getallorders`;
       const data = await fetch(URL);
       const result = await data.json();
       setOrder(result);

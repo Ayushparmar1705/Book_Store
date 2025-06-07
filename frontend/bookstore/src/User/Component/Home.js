@@ -9,7 +9,7 @@ export default function Home() {
     const [category, setCategory] = useState([]);
     const [filterCategory, setFilterCategory] = useState([]);
     const [loading, setLoading] = useState(false);
-    const itemsPerPage = 30;
+    const itemsPerPage = 100;
 
 
 

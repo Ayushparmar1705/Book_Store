@@ -10,7 +10,7 @@ export default function Listbooks() {
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 20;
 
   async function Allbooks() {
     const URL = "http://localhost:8080/admin/bookslist/undefined";

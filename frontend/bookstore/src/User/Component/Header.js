@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { Link, redirect, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
@@ -8,6 +8,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [username, setUserName] = useState("");
   const [token, setToken] = useState(null);
+  const [loading , setLoading] = useState(true);
   const location = useLocation();
 
   function Logoutfunc() {
@@ -19,6 +20,7 @@ export default function Header() {
       const storedToken = localStorage.getItem("token");
       if (!storedToken) {
         setToken("");
+        setLoading(false);
         return;
       }
 
@@ -42,16 +44,16 @@ export default function Header() {
     }
 
     getUserName();
-  }, [navigate]);
+  }, []);
 
   return (
-    <header className="border-b-2 border-gray-100 px-4 sm:px-8 py-4 flex items-center ml-[20px]">
+    <header className="border-b-2 border-gray-100 px-4 sm:px-8 py-4 flex  items-center ml-[20px]">
       <div className="flex  gap-2">
         <Link to="/home"><img src='/images/download.png' alt='No found' className='h-20 w-20 w-auto'></img></Link>
       </div>
 
       {/* Desktop Navigation */}
-      <nav className="hidden flex md:flex gap-6 ml-[70px]">
+      <nav className="hidden flex md:flex gap-6 ml-[70px] w-[100%] justify-end">
         <Link to="/home" className={`${location.pathname === '/home' ? "text-blue-500" : "text-black"}`}>Home</Link>
         <Link to="/shop" className={`${location.pathname === '/shop' ? "text-blue-500" : "text-black"}`}>Shop</Link>
         <Link to="/contact" className="hover:text-blue-500 border-black">Contact</Link>
@@ -66,8 +68,8 @@ export default function Header() {
       >
         <p className="text-white font-medium transition-2">{username[0]?.toUpperCase()}</p></div>) : (
         <div className='p-[10px] m-[0px] flex w-[100%] justify-end'>
-          <Link to="/users/login" className="block p-[10px] hover:bg-gray-100  rounded">Login</Link>
-          <Link to="/users/signup" className="bg-blue-100 p-[10px] block hover:bg-gray-100  rounded ml-[10px]">Signup</Link>
+          <Link to="/users/login" className="block p-[10px]  text-blue-500 rounded">Login</Link>
+          <Link to="/users/signup" className="100 p-[10px] block text-blue-500  rounded ml-[10px]">Signup</Link>
         </div>
       )}
 

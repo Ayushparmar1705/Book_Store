@@ -234,7 +234,7 @@ export default function Shop() {
                 ) : (<div className='flex gap-[20px] flex-wrap'>
                     {currentItems.map((data) => (
                         <div key={data.id} className='mt-[10px] shadow-lg text-center  transition hover:scale-104 h-[300px] w-[300px] text-wrap rounded-[10px] p-[10px]'>
-                            <Link><img className='rounded-[10px] h-[200px] w-[200px] m-[auto]' src={data.image} alt='Noimg'></img></Link>
+                            <Link to={`/bookdetail/${data.id}`}><img className='rounded-[10px] h-[200px] w-[200px] m-[auto]' src={data.image} alt='Noimg'></img></Link>
                             <p className='break-words font-bold'>{data.name}</p>
 
                             <p className='font-bold'>₹ {data.price}</p>

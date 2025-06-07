@@ -7,7 +7,7 @@ export default function AdminHeader() {
     const [dropdown, setDropdown] = useState(null);
 
     const handleLogout = () => {
-        localStorage.removeItem('auth');
+        localStorage.removeItem('username');
         navigate('/');
     };
 

@@ -8,6 +8,7 @@ export default function Adminlogin() {
     function handleAdminLogin(e)
     {
         e.preventDefault();
+        
         if(email === "admin@gmail.com")
         {
             if(password === "admin")
