@@ -1,121 +1,81 @@
-import React, { use, useEffect, useState } from 'react';
-import { Link, redirect, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
-
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 export default function Header() {
-  const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [username, setUserName] = useState("");
-  const [token, setToken] = useState(null);
-  const [loading , setLoading] = useState(true);
+
+  const [username, setUsername] = useState("");
+  const [toggle, setToggle] = useState(false);
   const location = useLocation();
-
-  function Logoutfunc() {
-    window.location.href = "/user-logout";
-  }
-
+  const [token, setToken] = useState("");
   useEffect(() => {
     async function getUserName() {
       const storedToken = localStorage.getItem("token");
       if (!storedToken) {
-        setToken("");
-        setLoading(false);
         return;
       }
-
-      setToken(storedToken);
-
+      else {
+        setToken(storedToken);
+      }
       try {
         const URL = "http://localhost:8080/users/profile";
         const data = await fetch(URL, {
           headers: {
-            Authorization: `Bearer ${storedToken}`,
-          },
+            Authorization: `Bearer ${storedToken}`
+          }
         });
-
         if (data.ok) {
           const response = await data.json();
-          setUserName(response.firstname);
+          setUsername(response.firstname)
         }
-      } catch (err) {
-        console.error("Error fetching user profile", err);
+
+      }
+      catch (e) {
+        console.log(e);
       }
     }
-
     getUserName();
-  }, []);
+  }, [])
 
+
+
+  const dropdown = () => {
+    setToggle(!toggle);
+  }
+  console.log("token = ", token);
   return (
-    <header className="border-b-2 border-gray-100 px-4 sm:px-8 py-4 flex  items-center ml-[20px]">
-      <div className="flex  gap-2">
-        <Link to="/home"><img src='/images/download.png' alt='No found' className='h-20 w-20 w-auto'></img></Link>
+    <div className='flex items-center w-full'>
+      <div>
+        <Link to="/home"><img src='/images/download.png' alt='No found' className='h-[150px] w-[150px]'></img></Link>
       </div>
+      {token ? (
+        <div className='flex ml-[100px] w-full justify-end'>
+          <Link to="/home" className={`${location.pathname === '/home' ? "text-blue-500" : "text-black"} p-[10px]`}>Home</Link>
+          <Link to="/shop" className={`${location.pathname === '/shop' ? "text-blue-500" : "text-black"} p-[10px]`}>Shop</Link>
+          <Link to="/contact" className={`${location.pathname === '/contact' ? "text-blue-500" : "text-black"} p-[10px]`}>Contact</Link>
+          <Link to="/about" className={`${location.pathname === '/about' ? "text-blue-500" : "text-black"} p-[10px]`}>About</Link>
+          <div className='relative'>
+            <div onClick={dropdown} className='cursor-pointer height-[100px]  flex justify-center items-center rounded-[100%]  bg-blue-500 w-[50px] h-[50px]'>
+              <p>{username[0]}</p>
 
-      {/* Desktop Navigation */}
-      <nav className="hidden flex md:flex gap-6 ml-[70px] w-[100%] justify-end">
-        <Link to="/home" className={`${location.pathname === '/home' ? "text-blue-500" : "text-black"}`}>Home</Link>
-        <Link to="/shop" className={`${location.pathname === '/shop' ? "text-blue-500" : "text-black"}`}>Shop</Link>
-        <Link to="/contact" className="hover:text-blue-500 border-black">Contact</Link>
-        <Link to="/about" className="hover:text-blue-500 border-black">About</Link>
-      </nav>
+            </div>
+            {toggle && (
+              <div className='absolute right-[10px] w-[150px] shadow rounded-[10px] flex flex-col p-[10px]'>
+                <div className='p-[10px]'><i className='fas fa-user'> </i> <Link to="/profile" className='p-[10px]'>Profile</Link></div>
+                <div className='p-[10px]'><i className='fas fa-shopping-cart'> </i> <Link to="/user-cart" className='p-[10px]'>Cart</Link></div>
+                <div className='p-[10px]'><i className='fas fa-box'> </i> <Link to="/success" className='p-[10px]'>Orders</Link></div><hr></hr>
+                <div className='p-[10px]'><i className='fas fa-sign-out-alt'> </i> <Link to="/user-logout" className='p-[10px]'>Logout</Link></div>
+              </div>
+            )}
+          </div>
 
-      {/* Profile / Auth */}
+        </div>
+      ) : (
+        <div className='flex'>
+          <Link to="/users/login" className={`${location.pathname === "/users/login" ? "text-blue-500" : "text-black"} p-[10px]`}>Login</Link>
+          <Link to="/users/signup" className={`${location.pathname === "/users/signup" ? "text-blue-500" : "text-black"} p-[10px]`}>Sign Up</Link>
+          <Link to="/home" className={`${location.pathname === '/home' ? "text-blue-500" : "text-black"} p-[10px]`}>Home</Link>
 
-      {username.length > 0 ? (<div
-        className="rounded-full bg-gradient-to-br from-sky-200 via-blue-400 to-indigo-900 w-[30px] h-[30px] flex items-center justify-center cursor-pointer"
-        onClick={() => setOpen(!open)}
-      >
-        <p className="text-white font-medium transition-2">{username[0]?.toUpperCase()}</p></div>) : (
-        <div className='p-[10px] m-[0px] flex w-[100%] justify-end'>
-          <Link to="/users/login" className="block p-[10px]  text-blue-500 rounded">Login</Link>
-          <Link to="/users/signup" className="100 p-[10px] block text-blue-500  rounded ml-[10px]">Signup</Link>
         </div>
       )}
-
-      {open && (
-        <div className="absolute right-0 top-20 w-[200px] bg-white p-4 rounded-md shadow-lg z-20 text-center rounded-[5px]">
-          {token && (
-            <>
-              <p className="text-sm">Signin as a <span className='text-blue-900'>{username}</span></p>
-
-              <div className='flex items-center p-[5px]'>
-                <i className='fas fa-user w-[50px]'></i>
-                <Link to="/profile" className="block w-[full]">Profile</Link>
-              </div>
-              <div className='flex items-center  p-[5px]'>
-                <i className='fas fa-shopping-cart w-[50px]'></i>
-                <Link to="/user-cart" className="block w-[full]">Cart</Link>
-              </div>
-              <div className='flex items-center  p-[5px]'>
-                <i className='fas fa-clipboard-list  w-[50px]'></i>
-                <Link to="/success" className="block w-[full]">Your Orders</Link>
-              </div><hr></hr>
-              <div className='flex items-center  p-[5px]'>
-                <i className='fas fa-sign-out w-[50px]'></i>
-                <button onClick={Logoutfunc} className="block w-[full]">Logout</button>
-              </div>
-
-            </>
-          )}
-        </div>
-      )}
-
-      {/* Hamburger Icon */}
-      <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
-        {menuOpen ? <X size={24} /> : <Menu size={24} />}
-      </button>
-
-
-      {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="absolute top-[90px] left-0 w-full bg-white flex flex-col items-center gap-4 py-4 z-10 shadow-md md:hidden">
-          <Link to="/home" onClick={() => setMenuOpen(false)}>Home</Link>
-          <Link to="/shop" onClick={() => setMenuOpen(false)}>Shop</Link>
-          <Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
-          <Link to="/about" onClick={() => setMenuOpen(false)}>About</Link>
-        </div>
-      )}
-    </header>
-  );
+    </div>
+  )
 }
