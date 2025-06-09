@@ -23,7 +23,7 @@ export default function Dashboard() {
       const [books, users, orders] = await Promise.all([
         fetch("http://localhost:8080/admin/bookslist/undefined"),
         fetch("http://localhost:8080/getusers"),
-        fetch("http://localhost:8080/admin/getallorders"),
+        fetch("http://localhost:8080/admin/getgraphorder"),
       ]);
       const [pbooks, pusers, porders] = await Promise.all([
         books.json(),

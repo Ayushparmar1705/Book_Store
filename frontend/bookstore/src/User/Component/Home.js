@@ -149,12 +149,12 @@ export default function Home() {
                     <img
                         src='./images/newbook.png'
                         alt='Featured Book'
-                        className='rounded-2xl w-full h-full object-cover'
+                        className='rounded-2xl w-full h-full object-cover max-[900px]:w-auto max-[900px]:m-auto'
                     />
                 </motion.div>
 
                 <motion.div
-                    className='text-center p-6 max-[900px]:w-full'
+                    className='text-center p-6 max-[900px]:w-full max-[900px]:mt-[100px]'
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1 }}
@@ -184,13 +184,13 @@ export default function Home() {
                     <p>Refund the Money within 2 days</p>
                 </div>
             </div>
-            <div className='flex justify-center items-center gap-50 bg-white  shadow w-[100%] mt-[10px] max-[900px]:flex max-[900px]:flex-col max-[900px]:w-[100%] max-[900px]:justify-right max-[900px]:m-[0px] max-[900px]:text-center'>
+            <div className='flex justify-center items-center gap-50 bg-white  shadow w-[90%] m-auto p-[10px]  mt-[10px] max-[900px]:flex max-[900px]:flex-col max-[900px]:w-[100%] max-[900px]:justify-right max-[900px]:m-[0px] max-[900px]:text-center'>
                 <div>
                     <p className='font-bold text-[40px]'>GET 20% DISCOUNT</p>
                     <button className='bg-black text-white p-[10px] rounded-[5px] w-[120px] mt-[10px]'>Buy Now</button>
                 </div>
                 <div className='w-[500px] p-[10px] flex flex-col justify-center max-[900px]:w-[100%]'>
-                    <img className='block h-[400px] w-[400px] max-[900px]:w-[100%]' src='./dbimages/1745903725504.jpg' alt='Nofound'></img>
+                    <img className='block h-[400px] w-[400px] max-[900px]:w-[100%]' src='./images/Newbook.jpg' alt='Nofound'></img>
                 </div>
             </div>
 

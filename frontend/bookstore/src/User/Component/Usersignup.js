@@ -59,9 +59,9 @@ export default function Usersignup() {
         }
     }
     return (
-        <div className="w-full h-screen bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 flex  items-center">
+        <div className="w-full h-screen bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 flex  items-center max-[900px]:w-[100%] max-[900px]:flex-col max-[900px]:flex max-[900px]:justify-right ">
 
-            <div className=' form p-[30px] h-[400px] w-[450px] rounded-[6px] bg-skyblue-200  n text-center shadow-lg ml-[100px]'>
+            <div className=' form p-[30px] h-[400px] w-[450px]  rounded-[6px] bg-skyblue-200  n text-center shadow-lg ml-[100px] max-[900px]:justify-right'>
                 <h1 className='font-bold text-[20px]'>Sign Up</h1>
                 <form onSubmit={handlesignup}>
                     <table className='p-[10px]  w-full'>
