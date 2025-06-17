@@ -63,18 +63,18 @@ export default function Home() {
 
         <div className='mt-[20px] w-[100%]'>
 
-            <motion.div className='flex w-full items-center justify-center  m-[0px] shadow-xl max-[900px]:w-[100%] max-[900px]:flex max-[900px]:flex-col'>
-                <div className='w-[500px] text-center max-[900px]:w-[100%]'>
+            <motion.div className='bg-gray-50  shadow rounded-[10px] flex w-full items-center justify-center  m-[0px] shadow-xl max-[900px]:w-[100%] max-[900px]:flex max-[900px]:flex-col'>
+                <div className='w-[500px] text-center max-[900px]:w-[100%] '>
                     <motion.p
                         initial={{ opacity: 0, x: 0, }}
                         whileInView={{ opacity: 1, y: 30 }}
                         transition={{ duration: 1 }}
-                        className='p-[10px] text-[30px] text-black font-mono font-bold'>BUY YOUR BEST BOOKS</motion.p>
+                        className='p-[10px] text-[60px] text-gray-500 font-mono font-bold'>BUY YOUR BEST BOOKS</motion.p>
                     <motion.p
                         initial={{ opacity: 0, x: 0, }}
                         whileInView={{ opacity: 1, y: 30 }}
                         transition={{ duration: 1 }}
-                        className='p-[10px]'>Discover the book that's captivating readers worldwide with its compelling story and beautiful prose.</motion.p>
+                        className='p-[10px] text-gray-500'>Discover the book that's captivating readers worldwide with its compelling story and beautiful prose.</motion.p>
                 </div>
                 <div className='p-[10px] max-[900px]:mt-[10px] max-[900px]:w-[100%] max-[900px]:border-box'>
                     <motion.img initial={{ opacity: 0, x: 0 }}
@@ -182,7 +182,7 @@ export default function Home() {
             </div>
             <div className='flex justify-center items-center gap-50 bg-white  shadow w-[90%] m-auto p-[10px]  mt-[10px] max-[900px]:flex max-[900px]:flex-col max-[900px]:w-[100%] max-[900px]:justify-right max-[900px]:m-[0px] max-[900px]:text-center'>
                 <div>
-                    <p className='font-bold text-[40px]'>GET 20% DISCOUNT</p>
+                    <p className='font-bold text-[40px] text-gray-500'>GET 20% DISCOUNT</p>
                     <button className='bg-black text-white p-[10px] rounded-[5px] w-[120px] mt-[10px]'>Buy Now</button>
                 </div>
                 <div className='w-[500px] p-[10px] flex flex-col justify-center max-[900px]:w-[100%]'>

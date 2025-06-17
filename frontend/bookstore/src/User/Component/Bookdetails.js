@@ -63,9 +63,17 @@ export default function Bookdetails() {
   return (
     <>
       <div className='flex p-[10px] justify-center aign-center shadow-xl max-[900px]:flex max-[900px]:flex-col'>
-        <div className='mt-10   rounded-[10px] p-4'>
-          <img src={`http://localhost:3000/${bookdata.image}`} alt={bookdata.name} className='object-cover rounded-lg mx-auto  bg-gray-100 border border-gray-300' />
-        </div>
+
+        <img
+          src={`http://localhost:3000/${bookdata.image}`}
+          alt={bookdata.name}
+          className="h-[500px] w-[500px]"
+
+        />
+
+
+
+
         <div className='p-[40px] '>
           <Link to='/home' className='text-blue-500'>{bookdata.category}</Link>
           <p className='font-bold text-[20px]'>{bookdata.name}</p>
@@ -78,10 +86,10 @@ export default function Bookdetails() {
             <p>Isbn 13 {bookdata.isbn13}</p><br></br>
             <p>Author {bookdata.author}</p><br></br>
             <p>Publisher {bookdata.publisher}</p><br></br>
-            <a href="#booksdetail" className='text-pink-500'>Show All details</a>
+            <a href="#booksdetail" className='border-b-[2px]'>Show All details</a>
           </div>
           <div className='mt-[10px] max-[900px]:w-[100%] max-[900px]:text-center'>
-            <input onChange={(e) => { setQuantity(e.target.value) }} className='w-[200px] border-[2px] p-[10px]' type='number' placeholder='Enter quantity'></input>
+            <input onChange={(e) => { setQuantity(e.target.value) }} className='w-[200px] border-[2px] p-[10px]  border-gray-200 focus:border-gray-200' type='number' placeholder='Enter quantity'></input>
             <button className='ml-[10px] max-[900px]:m-[0px] max-[900px]:mt-[10px] w-[200px] transition rounded-[10px] bg-white border-[2px] hover:bg-black hover:text-white p-[10px] font-bold' onClick={AddCart}>Add Cart</button>
           </div>
         </div>

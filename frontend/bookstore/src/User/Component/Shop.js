@@ -169,7 +169,14 @@ export default function Shop() {
                     onKeyDown={(e) => {
 
                         if (e.key === "Enter") {
-                            searchBook();
+                            if(bookname.length>0)
+                            {
+                                searchBook();
+                            }
+                            else
+                            {
+                                setBooks(Allbooks);
+                            }
                         }
                     }}
                 />
