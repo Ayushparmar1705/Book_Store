@@ -64,14 +64,14 @@ export default function Bookdetails() {
     <>
       <div className='flex p-[10px] justify-center aign-center shadow-xl max-[900px]:flex max-[900px]:flex-col'>
         <div className='mt-10   rounded-[10px] p-4'>
-          <img src={`http://localhost:3000/${bookdata.image}`} alt={bookdata.name} className='rounded-lg mx-auto object-cover bg-gray-100 border border-gray-300' />
+          <img src={`http://localhost:3000/${bookdata.image}`} alt={bookdata.name} className='object-cover rounded-lg mx-auto  bg-gray-100 border border-gray-300' />
         </div>
         <div className='p-[40px] '>
           <Link to='/home' className='text-blue-500'>{bookdata.category}</Link>
           <p className='font-bold text-[20px]'>{bookdata.name}</p>
           <p className=''>{bookdata.description}</p><br></br>
 
-          <p className='font-bold text-[20px] text-blue-600'>₹ {bookdata.price}</p><br></br>
+          <p className='font-bold text-[20px]'>₹{bookdata.price}</p><br></br>
           <div className='border-[2px] border-gray-50 p-[10px] w-[500px] shadow-sm text-center max-[900px]:w-[100%]'>
             <p className='text-center font-bold text-[20px] border-[2px] border-gray-50'>Book details</p><br></br>
             <p>Isbn 10 {bookdata.isbn10}</p><br></br>

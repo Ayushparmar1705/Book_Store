@@ -69,7 +69,7 @@ export default function Home() {
                         initial={{ opacity: 0, x: 0, }}
                         whileInView={{ opacity: 1, y: 30 }}
                         transition={{ duration: 1 }}
-                        className='p-[10px] text-[30px] text-blue-600 font-bold'>MOST SELLING BOOK</motion.p>
+                        className='p-[10px] text-[30px] text-black font-mono font-bold'>BUY YOUR BEST BOOKS</motion.p>
                     <motion.p
                         initial={{ opacity: 0, x: 0, }}
                         whileInView={{ opacity: 1, y: 30 }}
@@ -114,16 +114,12 @@ export default function Home() {
                             filterCategory.map((book) => (
                                 <div key={book.id} className='shadow-lg  hover:scale-105 transition-transform duration-300 rounded-lg text-center p-4 h-[400px] w-[300px] flex-shrink-0'>
                                     <Link to={`/bookdetail/${book.id}`}>
-                                        {/* <img
+                                        <img
                                             src={`http://localhost:3000/${book.image}`}
                                             alt={book.name}
                                             className='w-full h-48 object-contain mx-auto rounded-lg h-[300px] w-[300px] mx-auto object-contain '
-                                        /> */}
-                                        <img
-                                            src={book.image}
-                                            alt={book.name}
-                                            className='w-full h-48 object-contain mx-auto rounded-lg h-[300px] w-[300px] mx-auto object-contain '
                                         />
+                                      
 
                                     </Link>
                                     <p>{book.category}</p>

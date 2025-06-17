@@ -88,7 +88,7 @@ export default function Shop() {
             setBooks(Allbooks);
         }
         else {
-            let filterBooks = books.filter((result) => {
+            let filterBooks = Allbooks.filter((result) => {
                 if (result["category"] === e.target.value) {
                     return result;
                 }
@@ -97,6 +97,7 @@ export default function Shop() {
 
             })
             setBooks(filterBooks);
+        
         }
 
 
@@ -190,7 +191,7 @@ export default function Shop() {
                     </div>
 
                     {isOpen && (
-                        <div className='w-[300px] bg-white shadow-xl p-[20px]  border-[2px] border-yellow-100'>
+                        <div className='w-[300px] bg-white shadow-xl p-[20px]  '>
 
 
                             <p className='border-b-[2px] text-center'>By Category</p>
@@ -198,7 +199,7 @@ export default function Shop() {
 
                                 category.map((data) => (
 
-                                    <div className='cursor-pointer   flex  p-[10px]' key={data.id}>
+                                    <div className='cursor-pointer flex p-[20px]' key={data.id}>
                                         <input
 
                                             className='h-[20px] w-[20px] bg-black '
@@ -229,12 +230,12 @@ export default function Shop() {
                 {loading ? (
 
 
-                   <Loading></Loading>
+                    <Loading></Loading>
 
                 ) : (<div className='flex gap-[20px] flex-wrap'>
                     {currentItems.map((data) => (
-                        <div key={data.id} className='mt-[10px] shadow-lg text-center  transition hover:scale-104 h-[300px] w-[300px] text-wrap rounded-[10px] p-[10px]'>
-                            <Link to={`/bookdetail/${data.id}`}><img className='rounded-[10px] h-[200px] w-[200px] m-[auto]' src={data.image} alt='Noimg'></img></Link>
+                        <div key={data.id} className='mt-[10px] shadow-lg text-center  transition hover:scale-104 h-[400px] w-[300px] text-wrap rounded-[10px] p-[10px]'>
+                            <Link to={`/bookdetail/${data.id}`}><img className='rounded-[10px] h-[300px] w-[200px] m-[auto]' src={data.image} alt='Noimg'></img></Link>
                             <p className='break-words font-bold'>{data.name}</p>
 
                             <p className='font-bold'>₹ {data.price}</p>

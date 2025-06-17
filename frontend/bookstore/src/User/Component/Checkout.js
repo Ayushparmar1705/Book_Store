@@ -1,7 +1,7 @@
 import { loadStripe } from '@stripe/stripe-js';
 import { jwtDecode } from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
-import { data, useLocation } from 'react-router-dom';
+import {useLocation } from 'react-router-dom';
 
 export default function Checkout() {
     const [result, setResult] = useState([]);
@@ -140,7 +140,7 @@ export default function Checkout() {
                         </div>
                     </form>
                     <div className='p-[10px]'>
-                        <button onClick={getCheckout} className='bg-blue-500 p-[10px] w-[200px] rounded-[10px]'>Pay</button>
+                        <button onClick={getCheckout} className='bg-blue-500 p-[10px] w-[200px] rounded-[10px]'>Pay </button>
                     </div>
                 </div>
                 <div className='shadow-xl w-[100%] p-[10px] text-center rounded-[10px]'>
@@ -149,7 +149,7 @@ export default function Checkout() {
                         <div key={data.id} className='text-center'>
                             <p>{data.name}</p>
                             <p>{data.price}</p>
-                            <img className='m-auto block w-[100px] h-[100px]' src={data.image} alt='no' /><hr />
+                            <img className='m-auto block w-[100px] h-[150px]' src={data.image} alt='no' />
                         </div>
                     ))}
                 </div>

@@ -67,7 +67,7 @@ export default function Dashboard() {
   };
   return (
     <div>
-      <div className='bg-[#5e72e4] p-[10px] flex h-[200px] gap-10 justify-center items-center'>
+      <div className='bg-white shadow  p-[10px] flex h-[200px] gap-10 justify-center items-center'>
         <div className='h-[100px] p-[10px] bg-[#ffffff] w-[300px] font-bold text-gray-500 text-center rounded-[10px]'>
           <p>Total Books</p>
           <p>{getBooks.length}</p>

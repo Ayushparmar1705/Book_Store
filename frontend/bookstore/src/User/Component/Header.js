@@ -9,14 +9,12 @@ export default function Header() {
 
 
   const storedToken = localStorage.getItem("token");
-  console.log(storedToken);
   useEffect(() => {
     async function getUserName() {
-      if (!storedToken)
-      {
+      if (!storedToken) {
         return;
       }
- 
+
 
       try {
         const URL = "http://localhost:8080/users/profile";
@@ -34,7 +32,7 @@ export default function Header() {
       }
     }
     getUserName();
-  }, []);
+  }, [storedToken]);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const toggleUserDropdown = () => setUserDropdown(!userDropdown);
@@ -43,36 +41,32 @@ export default function Header() {
     <>
       <Link
         to="/home"
-        className={`block px-3 py-2 rounded-md text-base font-medium ${
-          location.pathname === "/home" ? "text-blue-500" : "text-gray-700"
-        } hover:text-blue-600`}
+        className={`block px-3 py-2 rounded-md text-base font-medium ${location.pathname === "/home" ? "text-blue-500" : "text-gray-700"
+          } hover:text-blue-600`}
         onClick={() => setMenuOpen(false)}
       >
         Home
       </Link>
       <Link
         to="/shop"
-        className={`block px-3 py-2 rounded-md text-base font-medium ${
-          location.pathname === "/shop" ? "text-blue-500" : "text-gray-700"
-        } hover:text-blue-600`}
+        className={`block px-3 py-2 rounded-md text-base font-medium ${location.pathname === "/shop" ? "text-blue-500" : "text-gray-700"
+          } hover:text-blue-600`}
         onClick={() => setMenuOpen(false)}
       >
         Shop
       </Link>
       <Link
         to="/contact"
-        className={`block px-3 py-2 rounded-md text-base font-medium ${
-          location.pathname === "/contact" ? "text-blue-500" : "text-gray-700"
-        } hover:text-blue-600`}
+        className={`block px-3 py-2 rounded-md text-base font-medium ${location.pathname === "/contact" ? "text-blue-500" : "text-gray-700"
+          } hover:text-blue-600`}
         onClick={() => setMenuOpen(false)}
       >
         Contact
       </Link>
       <Link
         to="/about"
-        className={`block px-3 py-2 rounded-md text-base font-medium ${
-          location.pathname === "/about" ? "text-blue-500" : "text-gray-700"
-        } hover:text-blue-600`}
+        className={`block px-3 py-2 rounded-md text-base font-medium ${location.pathname === "/about" ? "text-blue-500" : "text-gray-700"
+          } hover:text-blue-600`}
         onClick={() => setMenuOpen(false)}
       >
         About
@@ -112,6 +106,7 @@ export default function Header() {
                 </button>
                 {userDropdown && (
                   <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg py-1 z-20">
+                    <p className="text-gray-700 text-center">Welcome {username}</p>
                     <Link
                       to="/profile"
                       className="block px-4 py-2 text-gray-700 hover:bg-blue-100"
@@ -150,31 +145,28 @@ export default function Header() {
             <nav className="hidden md:flex space-x-6 items-center">
               <Link
                 to="/users/login"
-                className={`text-base font-medium ${
-                  location.pathname === "/users/login"
+                className={`text-base font-medium ${location.pathname === "/users/login"
                     ? "text-blue-500"
                     : "text-gray-700"
-                } hover:text-blue-600`}
+                  } hover:text-blue-600`}
               >
                 Login
               </Link>
               <Link
                 to="/users/signup"
-                className={`text-base font-medium ${
-                  location.pathname === "/users/signup"
+                className={`text-base font-medium ${location.pathname === "/users/signup"
                     ? "text-blue-500"
                     : "text-gray-700"
-                } hover:text-blue-600`}
+                  } hover:text-blue-600`}
               >
                 Sign Up
               </Link>
               <Link
                 to="/home"
-                className={`text-base font-medium ${
-                  location.pathname === "/home"
+                className={`text-base font-medium ${location.pathname === "/home"
                     ? "text-blue-500"
                     : "text-gray-700"
-                } hover:text-blue-600`}
+                  } hover:text-blue-600`}
               >
                 Home
               </Link>
