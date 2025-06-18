@@ -13,6 +13,7 @@ import Sucesspayment from '../User/Component/Sucesspayment'
 import Logout from '../User/Component/Logout'
 import Headerlayout from '../User/Component/Headerlayout'
 
+
 export default function UserRoutes() {
     return (
         <div>
@@ -30,6 +31,7 @@ export default function UserRoutes() {
                 <Route path='/checkout' element={<Headerlayout><Checkout /></Headerlayout>} />
                 <Route path='/success' element={<Headerlayout><Sucesspayment></Sucesspayment></Headerlayout>}></Route>
                 <Route path='/user-logout' element={<Headerlayout><Logout /></Headerlayout>}></Route>
+
 
 
             </Routes>

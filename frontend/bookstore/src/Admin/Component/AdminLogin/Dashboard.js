@@ -67,7 +67,7 @@ export default function Dashboard() {
   };
   return (
     <div>
-      <div className='bg-white shadow  p-[10px] flex h-[200px] gap-10 justify-center items-center'>
+      <div className='bg-white shadow  p-[10px] flex h-[200px] gap-10 justify-center items-center max-[900px]:flex max-[900px]:flex-col max-[900px]:h-[500px]'>
         <div className='h-[100px] p-[10px] bg-[#ffffff] w-[300px] font-bold text-gray-500 text-center rounded-[10px]'>
           <p>Total Books</p>
           <p>{getBooks.length}</p>
@@ -82,11 +82,11 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className='flex'>
-        <div className='w-[1000px]'>
+      <div className='flex max-[900px]:flex max-[900px]:flex-col max-[900px]:w-[100%]'>
+        <div className='w-[1000px] max-[900px]:w-[100%]'>
           <Bar data={barData}></Bar>
         </div>
-        <div className='w-[1000px]'>
+        <div className='w-[1000px] max-[900px]:w-[100%] max-[900px]:m-[0px] max-[900px]:p-[0px]'>
           <ResponsiveContainer width="100%" height={400}>
             <LineChart data={sales} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -101,11 +101,11 @@ export default function Dashboard() {
 
 
       </div>
-      <div className='w-[100%]'>
-        <div className='flex justify-end rounded shadow p-[10px]'>
-          <table>
+      <div className='w-[100%] max-[900px]:w-[100%]  max-[900px]:p-[0px]'>
+        <div className=' rounded shadow p-[10px] max-[900px]:w-[100%] max-[900px]:overflow-scroll max-[900px]:p-[0px]'>
+          <table className='max-[900px]:overflow-scroll'>
             <thead>
-              <tr className='bg-gray-50 p-[20px] border-t-[2px] border-gray-100 border-b-[2px]'>
+              <tr className='bg-gray-50 p-[20px] border-t-[2px] max-[900px]:w-[100%] border-gray-100 border-b-[2px]'>
                 <th className='p-[10px] text-center'>Isbn-10</th>
                 <th className='p-[10px] text-center'>Isbn-13</th>
                 <th className='p-[10px] text-center'>Name</th>
