@@ -9,14 +9,8 @@ export default function Home() {
     const [category, setCategory] = useState([]);
     const [filterCategory, setFilterCategory] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [catname, setCatName] = useState("");
     const itemsPerPage = 100;
-
-
-
-
-
-
-
     useEffect(() => {
 
         async function fetchEverything() {
@@ -50,6 +44,7 @@ export default function Home() {
     function FilterBooks(e) {
 
         const selected = e.target.value;
+        setCatName(selected);
         if (selected === "All") {
             setFilterCategory(bookList);
         } else {
@@ -83,13 +78,7 @@ export default function Home() {
             </motion.div>
 
             <div className='flex flex-wrap justify-center gap-4 p-5 text-center text-[20px] max-[900px]:overflow-x-auto'>
-                <button
-                    onClick={FilterBooks}
-                    value="All"
-                    className='font-bold text-sm bg-black text-white w-[100px] px-4 py-2 rounded-lg'
-                >
-                    All
-                </button>
+
                 {
                     category.map((cat) => (
                         <button
@@ -97,7 +86,8 @@ export default function Home() {
                             value={cat.category_name}
                             onClick={FilterBooks}
 
-                            className='font-bold text-sm bg-white hover:bg-gray-50 shadow-sm px-4 py-2 rounded-lg'
+                            className={cat.category_name === catname ? 'font-bold text-sm bg-black text-white shadow-sm px-4 py-2 rounded-lg ' : 'font-bold text-sm bg-white hover:bg-gray-50 shadow-sm px-4 py-2 rounded-lg'}
+
                         >
                             {cat.category_name}
                         </button>
@@ -106,26 +96,28 @@ export default function Home() {
             </div>
 
             {loading ? (
-               <Loading/>
+                <Loading />
             ) : (
                 <div className='overflow-x-auto h-[500px] w-full'>
                     <div className='flex gap-5 h-[500px] px-4'>
                         {filterCategory.length > 0 ? (
                             filterCategory.map((book) => (
-                                <div key={book.id} className='shadow-lg  hover:scale-105 transition-transform duration-300 rounded-lg text-center p-4 h-[400px] w-[300px] flex-shrink-0'>
-                                    <Link to={`/bookdetail/${book.id}`}>
-                                        <img
+                                <Link to={`/bookdetail/${book.id}`}>
+                                    <div key={book.id} className='border-[2px] border-gray-100 hover:scale-105 transition-transform duration-300 rounded-lg text-center p-4 h-[400px] w-[300px] flex-shrink-0'>
+
+                                        {/* <img
                                             src={`http://localhost:3000/${book.image}`}
                                             alt={book.name}
                                             className='w-full h-48 object-contain mx-auto rounded-lg h-[300px] w-[300px] mx-auto object-contain '
-                                        />
-                                      
+                                        /> */}
 
-                                    </Link>
-                                    <p>{book.category}</p>
-                                    <p className='font-bold mt-2'>{book.name}</p>
-                                    <p className='font-bold text-gray-700'>₹ {book.price}</p>
-                                </div>
+                                        <Link to={`/bookdetail/${book.id}`}><img className='rounded-[10px] h-[300px] w-[200px] m-[auto]' src={book.image} alt='Noimg'></img></Link>
+
+                                        <p>{book.category}</p>
+                                        <p className='font-bold mt-2'>{book.name}</p>
+                                        <p className='font-bold text-gray-700'>₹ {book.price}</p>
+                                    </div>
+                                </Link>
                             ))
                         ) : (
                             <div className='w-[100%] text-center'><p className='text-black font-bold  text-[20px]'>No Books Found</p></div>
@@ -167,15 +159,15 @@ export default function Home() {
                 </motion.div>
             </div>
             <div className='grid grid-cols-12 p-[10px] gap-[40px] max-[900px]:flex max-[900px]:flex-col max-[900px]:w-[100%]'>
-                <div className='rounded-[10px] flex flex-col justify-center  items-center col-span-4 border-[2px] border-gray-100 h-[100px] p-[10px] text-center shadow-xl'>
+                <div className='rounded-[10px] flex flex-col justify-center  items-center col-span-4   h-[100px] p-[10px] text-center shadow'>
                     <p className='font-bold ]'>Free Delivery</p>
                     <p>Free Delivery Upto order ₹ 2000</p>
                 </div>
-                <div className='rounded-[10px] flex flex-col justify-center col-span-4 border-[2px] border-gray-100 h-[100px] p-[10px] text-center shadow-xl'>
+                <div className='rounded-[10px] flex flex-col justify-center col-span-4  h-[100px] p-[10px] text-center shadow'>
                     <p className='font-bold'>Secure Payment</p>
                     <p>Provide 100% Secure Payment Service</p>
                 </div>
-                <div className='rounded-[10px]  flex-col justify-center col-span-4 border-[2px] border-gray-100 h-[100px] p-[10px] text-center shadow-xl'>
+                <div className='rounded-[10px]  flex-col justify-center col-span-4  h-[100px] p-[10px] text-center shadow'>
                     <p className='font-bold'>Money Back</p>
                     <p>Refund the Money within 2 days</p>
                 </div>

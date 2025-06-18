@@ -12,8 +12,8 @@ export default function Edituser() {
     });
 
     function getValue(e) {
-        const { name, value } = e.target;
-        setUserData((prev) => ({ ...prev, [name]: value }));
+        const { name } = e.target;
+        setUserData(name);
     }
 
     useEffect(() => {

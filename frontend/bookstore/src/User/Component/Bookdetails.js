@@ -63,13 +63,15 @@ export default function Bookdetails() {
   return (
     <>
       <div className='flex p-[10px] justify-center aign-center shadow-xl max-[900px]:flex max-[900px]:flex-col'>
-
+        {/* 
         <img
           src={`http://localhost:3000/${bookdata.image}`}
           alt={bookdata.name}
           className="h-[500px] w-[500px]"
 
-        />
+        /> */}
+        <img className='rounded-[10px] h-[300px] w-[200px] m-[auto]' src={bookdata.image} alt='Noimg'></img>
+
 
 
 
@@ -127,7 +129,3 @@ export default function Bookdetails() {
     </>
   )
 }
-
-
-
-// 61 to 70

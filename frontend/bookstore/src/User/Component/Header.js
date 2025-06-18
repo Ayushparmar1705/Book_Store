@@ -75,7 +75,7 @@ export default function Header() {
   );
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
+    <header className="bg-white shadow sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
@@ -146,8 +146,8 @@ export default function Header() {
               <Link
                 to="/users/login"
                 className={`text-base font-medium ${location.pathname === "/users/login"
-                    ? "text-blue-500"
-                    : "text-gray-700"
+                  ? "text-blue-500"
+                  : "text-gray-700"
                   } hover:text-blue-600`}
               >
                 Login
@@ -155,8 +155,8 @@ export default function Header() {
               <Link
                 to="/users/signup"
                 className={`text-base font-medium ${location.pathname === "/users/signup"
-                    ? "text-blue-500"
-                    : "text-gray-700"
+                  ? "text-blue-500"
+                  : "text-gray-700"
                   } hover:text-blue-600`}
               >
                 Sign Up
@@ -164,8 +164,8 @@ export default function Header() {
               <Link
                 to="/home"
                 className={`text-base font-medium ${location.pathname === "/home"
-                    ? "text-blue-500"
-                    : "text-gray-700"
+                  ? "text-blue-500"
+                  : "text-gray-700"
                   } hover:text-blue-600`}
               >
                 Home
