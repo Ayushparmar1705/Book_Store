@@ -1,6 +1,7 @@
 import React, { use, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Loading from './Loading';
+import { jwtDecode } from 'jwt-decode';
 export default function Shop() {
 
     const [books, setBooks] = useState([]);
@@ -13,7 +14,41 @@ export default function Shop() {
     const [loading, setLoading] = useState(false);
     const [startPrice, setStartPrice] = useState(0);
     const [endPrice, setEndPrice] = useState(0);
+    const [name, setName] = useState("");
+    const [price, setPrice] = useState(0);
+    const [quantity, setQuantity] = useState(0);
+    const [image, setImage] = useState("");
 
+
+
+    const token = localStorage.getItem("token");
+    const decoded_token = jwtDecode(token).id;
+    const cartData = {
+        "name": name,
+        "price": price,
+        "quantity": quantity,
+        "id": decoded_token,
+        "image": image,
+        "total": price * quantity
+    }
+    const navigate = useNavigate();
+    async function AddCart() {
+
+        if (decoded_token === undefined) {
+            alert("Please Login");
+            navigate("/users/login")
+        }
+        else {
+
+            const URL = `http://localhost:8080/users-cart/${decoded_token}`;
+            const data = await fetch(URL);
+            const result = await data.json();
+            console.log(result);
+            navigate("/add-cart", { state: cartData })
+
+
+        }
+    }
 
 
 
@@ -97,7 +132,7 @@ export default function Shop() {
 
             })
             setBooks(filterBooks);
-        
+
         }
 
 
@@ -169,12 +204,10 @@ export default function Shop() {
                     onKeyDown={(e) => {
 
                         if (e.key === "Enter") {
-                            if(bookname.length>0)
-                            {
+                            if (bookname.length > 0) {
                                 searchBook();
                             }
-                            else
-                            {
+                            else {
                                 setBooks(Allbooks);
                             }
                         }
@@ -241,12 +274,17 @@ export default function Shop() {
 
                 ) : (<div className='flex gap-[20px] flex-wrap'>
                     {currentItems.map((data) => (
-                        <div key={data.id} className='mt-[10px] shadow-lg text-center  transition hover:scale-104 h-[400px] w-[300px] text-wrap rounded-[10px] p-[10px]'>
-                            <Link to={`/bookdetail/${data.id}`}><img className='rounded-[10px] h-[300px] w-[200px] m-[auto]' src={data.image} alt='Noimg'></img></Link>
-                            <p className='break-words font-bold'>{data.name}</p>
+                        
+                        <>
 
-                            <p className='font-bold'>₹ {data.price}</p>
-                        </div>
+                            <div key={data.id} className='mt-[10px] shadow-lg text-center  transition hover:scale-104 h-[400px] w-[300px] text-wrap rounded-[10px] p-[10px]'>
+                                <Link to={`/bookdetail/${data.id}`}><img className='rounded-[10px] h-[300px] w-[200px] m-[auto]' src={data.image} alt='Noimg'></img></Link>
+                                <p className='break-words font-bold'>{data.name}</p>
+
+                                <p className='font-bold'>₹ {data.price}</p>
+                                <button className='bg-yellow-200 rounded-[10px] p-[5px]' onClick={AddCart}>Add Cart</button>
+                            </div>
+                        </>
                     ))
 
                     }
@@ -273,3 +311,6 @@ export default function Shop() {
 
     )
 }
+
+
+// Pending add cart directly shop page

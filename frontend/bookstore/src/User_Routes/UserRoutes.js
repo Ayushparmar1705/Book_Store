@@ -12,6 +12,10 @@ import Checkout from '../User/Component/Checkout'
 import Sucesspayment from '../User/Component/Sucesspayment'
 import Logout from '../User/Component/Logout'
 import Headerlayout from '../User/Component/Headerlayout'
+import ForgotPassword from '../User/Component/ForgotPassword'
+
+
+
 
 
 export default function UserRoutes() {
@@ -31,7 +35,7 @@ export default function UserRoutes() {
                 <Route path='/checkout' element={<Headerlayout><Checkout /></Headerlayout>} />
                 <Route path='/success' element={<Headerlayout><Sucesspayment></Sucesspayment></Headerlayout>}></Route>
                 <Route path='/user-logout' element={<Headerlayout><Logout /></Headerlayout>}></Route>
-
+                <Route path='/forgotpassword' element={<ForgotPassword></ForgotPassword>}></Route>
 
 
             </Routes>

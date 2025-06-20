@@ -104,6 +104,7 @@ export default function Userlogin() {
             <div className='mt-4'>
               <span className='font-bold'>Not a member? </span>
               <Link className='font-bold border-b-[2px]' to="/users/signup">Sign Up</Link>
+              <Link to="/forgotpassword">forgot password</Link>
             
             </div>
          

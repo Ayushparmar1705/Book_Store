@@ -167,7 +167,7 @@ export default function Home() {
                     <p className='font-bold'>Secure Payment</p>
                     <p>Provide 100% Secure Payment Service</p>
                 </div>
-                <div className='rounded-[10px]  flex-col justify-center col-span-4  h-[100px] p-[10px] text-center shadow'>
+                <div className='rounded-[10px] flex flex-col justify-center col-span-4  h-[100px] p-[10px] text-center shadow'>
                     <p className='font-bold'>Money Back</p>
                     <p>Refund the Money within 2 days</p>
                 </div>
