@@ -13,6 +13,7 @@ import Sucesspayment from '../User/Component/Sucesspayment'
 import Logout from '../User/Component/Logout'
 import Headerlayout from '../User/Component/Headerlayout'
 import ForgotPassword from '../User/Component/ForgotPassword'
+import ResetPassword from '../User/Component/ResetPassword'
 
 
 
@@ -36,7 +37,7 @@ export default function UserRoutes() {
                 <Route path='/success' element={<Headerlayout><Sucesspayment></Sucesspayment></Headerlayout>}></Route>
                 <Route path='/user-logout' element={<Headerlayout><Logout /></Headerlayout>}></Route>
                 <Route path='/forgotpassword' element={<ForgotPassword></ForgotPassword>}></Route>
-
+                <Route path='/resetpassword/:token' element={<ResetPassword/>}></Route>
 
             </Routes>
         </div>

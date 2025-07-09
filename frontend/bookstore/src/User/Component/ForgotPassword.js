@@ -18,7 +18,7 @@ export default function ForgotPassword() {
       });
 
       const data = await res.json();
-
+      localStorage.setItem("email",email);
       if (res.ok) {
         setMsg(data.message); // ✅ Success message
       } else {
